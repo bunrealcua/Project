@@ -15,7 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ClCompile Include="Source.cpp">
+=======
+    <ClCompile Include="Project.cpp">
+>>>>>>> Stashed changes
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
