@@ -1,8 +1,8 @@
-#include<iostream>
-using namespace std;
+#include"StructStudent.h"
 
 int main()
 {
-	cout << "Hello World!!!" << endl;
+	Student* pHead;
+	Signup(pHead);
 	return 0;
 }

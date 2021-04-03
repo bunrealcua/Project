@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Signup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StructStudent.h" />

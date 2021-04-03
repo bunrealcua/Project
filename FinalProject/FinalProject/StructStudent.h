@@ -7,10 +7,13 @@ using namespace std;
 
 struct Student {
 	int ID; wstring First_Name;
-	wstring Last_Name; wstring Gender; // Change type of data of Gender into bool, true:male and fale:female
-	wstring DateOfBirth; int Social_ID; // change type of data of DateOfBirth into int ddmmyyyy
-	wstring username; wstring password;
-	wstring Class; int SchoolYear; Student* pNext;
+	wstring Last_Name; bool Gender;
+	int DateOfBirth[8]; int Social_ID;
+	string username; string password;
+	string Class; int SchoolYear; Student* pNext;
 };
 typedef struct Student Student;
+
+void input(Student*& pHead);
+void Signup(Student*& pHead);
 #endif
