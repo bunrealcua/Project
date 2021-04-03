@@ -12,8 +12,23 @@ struct Student {
 	string username; string password;
 	string Class; int SchoolYear; Student* pNext;
 };
-typedef struct Student Student;
 
+typedef struct Course {
+	int ID; 
+	string name; 
+	wstring lecturer; 
+	int credits; 
+	int maxStu; 
+	int weekDay; 
+	int session;
+	string fileDir;
+} cr;
+
+// student
 void input(Student*& pHead);
 void Signup(Student*& pHead);
+///
+
+// course
+void crAdd();
 #endif
