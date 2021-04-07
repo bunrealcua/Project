@@ -144,11 +144,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
 <<<<<<< HEAD:FinalProject/FinalProject/FinalProject.vcxproj
+=======
+    <ClCompile Include="InputStructStudent.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Signup.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InputStudent.h" />
     <ClInclude Include="StructStudent.h" />
 =======
     <ClInclude Include="TestHeader.h" />
