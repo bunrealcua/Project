@@ -143,6 +143,7 @@
     <ClCompile Include="InputStructStudent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Signup.cpp" />
+    <ClCompile Include="StaffSemesterCreation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StructStudent.h" />

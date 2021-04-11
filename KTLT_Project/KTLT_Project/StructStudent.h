@@ -14,16 +14,13 @@ typedef struct Student {
 	string Class; int SchoolYear; Student* pNext;
 }stu;
 
-typedef struct Course {
-	int ID;
-	string name;
-	wstring lecturer;
-	int credits;
-	int maxStu;
-	int weekDay;
-	int session;
-	string fileDir;
-} cr;
+struct Course {
+	int ID; wstring Name;
+	wstring Lecturer; int Credits;
+	int StudentLimit; int Weekday;
+	int Session; Course* next;
+};
+struct CourseInfo { wstring info; CourseInfo* next; };
 
 // student
 void input(Student*& pHead);
@@ -34,6 +31,12 @@ void SetUp(wstring str, Student*& pHead);
 
 // course
 void crAdd();
+
+// Semester Creation
+void SetUpSemester1(int schooyear, CourseInfo* pHead);
+void DeleteListCourse(CourseInfo*& pHead);
+void ViewListCourse(int schoolyear, int semester);
+void SetUpInfoCourse(wstring& wstr, Course*& pHead);
 #endif
 
 
