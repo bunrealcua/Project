@@ -1,4 +1,4 @@
-#include"TestHeader.h"
+#include"StructStudent.h"
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -38,7 +38,6 @@ void Input(string path, wstring& str, Student*& pHead)
 	}
 	FileIn.close();
 }
-
 
 void SetUp(wstring str, Student*& pHead)
 {
@@ -81,7 +80,8 @@ void SetUp(wstring str, Student*& pHead)
 	lc2 = i;
 	tempString = "";
 	for (i = lc1 + 1;i < lc2;i++) tempString += str[i];
-	pHead->Gender = tempString;
+	if (tempString == "Male") pHead->Gender = 1; else pHead->Gender = 0;
+	//pHead->Gender = tempString;
 
 	//Get Date of Birth
 	lc1 = lc2;

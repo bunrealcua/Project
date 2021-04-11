@@ -21,13 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-<<<<<<< HEAD:FinalProject/FinalProject/FinalProject.vcxproj
-    <ProjectGuid>{c29270b4-c202-4258-af92-bbf9381a9239}</ProjectGuid>
-    <RootNamespace>FinalProject</RootNamespace>
-=======
-    <ProjectGuid>{cc69202d-52a5-400e-8a80-95817d3c23d1}</ProjectGuid>
-    <RootNamespace>TestProject</RootNamespace>
->>>>>>> test:TestProject/TestProject/TestProject.vcxproj
+    <ProjectGuid>{12ba5090-eaad-4ce1-8d28-da4e11530c7c}</ProjectGuid>
+    <RootNamespace>KTLTProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -144,23 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-<<<<<<< HEAD:FinalProject/FinalProject/FinalProject.vcxproj
-=======
+    <ClCompile Include="course.cpp" />
     <ClCompile Include="InputStructStudent.cpp" />
->>>>>>> Stashed changes
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Signup.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputStudent.h" />
     <ClInclude Include="StructStudent.h" />
-=======
-    <ClInclude Include="TestHeader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TestSource.cpp" />
->>>>>>> test:TestProject/TestProject/TestProject.vcxproj
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

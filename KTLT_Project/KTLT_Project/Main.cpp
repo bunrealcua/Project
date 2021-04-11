@@ -1,4 +1,6 @@
 #include"StructStudent.h"
+#include<iostream>
+using namespace std;
 
 int main()
 {
