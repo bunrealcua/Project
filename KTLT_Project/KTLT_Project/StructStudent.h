@@ -5,7 +5,7 @@
 #include<string>
 using namespace std;
 
-typedef struct Student {
+struct Student {
 	int ID; wstring First_Name;
 	wstring Last_Name; bool Gender;
 	string DateOfBirth; int Social_ID;
@@ -41,7 +41,7 @@ void SetUpInfoCourse(wstring& wstr, Course*& pHead);
 void changepass(Student*& pHead);
 
 //Register new courses
-void register();
+void registercourse(Student* pHead, Course* pHead1);
 #endif
 
 
