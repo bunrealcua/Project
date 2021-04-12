@@ -1,4 +1,3 @@
-
 #ifndef FinalProject
 #define FinalProject
 #include<iostream>
@@ -37,6 +36,9 @@ void SetUpSemester1(int schooyear, CourseInfo* pHead);
 void DeleteListCourse(CourseInfo*& pHead);
 void ViewListCourse(int schoolyear, int semester);
 void SetUpInfoCourse(wstring& wstr, Course*& pHead);
+
+// change password
+void changepass(Student*& pHead);
 #endif
 
 
