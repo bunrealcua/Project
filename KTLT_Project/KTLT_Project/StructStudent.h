@@ -13,6 +13,7 @@ typedef struct Student {
 	string Class; int SchoolYear; Student* pNext;
 }stu;
 
+
 struct Course {
 	int ID; wstring Name;
 	wstring Lecturer; int Credits;

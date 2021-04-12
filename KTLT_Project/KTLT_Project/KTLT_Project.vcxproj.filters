@@ -36,6 +36,12 @@
     <ClCompile Include="Registercourses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="viewEnrolledCourse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logIn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StructStudent.h">
