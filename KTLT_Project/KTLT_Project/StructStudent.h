@@ -39,6 +39,9 @@ void SetUpInfoCourse(wstring& wstr, Course*& pHead);
 
 // change password
 void changepass(Student*& pHead);
+
+//Register new courses
+void register();
 #endif
 
 
