@@ -1,11 +1,17 @@
 ﻿#include"StructStudent.h"
 #include<iostream>
+#include<io.h>
+#include<fcntl.h>
+#include<locale>
+#include<codecvt>
+#include<string>
+#include<conio.h>
 using namespace std;
 
 int wmain()
 {
-	Student* pHead;
-	Signup(pHead);
+	/*Student* pHead;
+	Signup(pHead);*/
 	// Hàm này để thêm course, view course.
 	int schoolyear;
 	_setmode(_fileno(stdin), _O_U16TEXT);
