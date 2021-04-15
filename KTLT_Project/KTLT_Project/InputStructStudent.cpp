@@ -146,3 +146,36 @@ void SetUp(wstring str, Student*& pHead)
 	x = atoi(tempInt.c_str());
 	pHead->SchoolYear = x;
 }
+
+/*Hàm xóa linked list Student*/
+void DeleteListStudent(Student*& pHead)
+{
+	Student* pCur = nullptr;
+	while (pHead != nullptr)
+	{
+		pCur = pHead;
+		pHead = pHead->pNext;
+		delete pCur;
+	}
+}
+
+/*Hàm in danh sách student ra màn hình*/
+void DisplayListStudent(Student* pHead)
+{
+	if (pHead == nullptr) return;
+	Student* pCur = pHead;
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	while (pCur != nullptr) {
+		wcout << pCur->ID << " ";
+		wcout << pCur->First_Name << " ";
+		wcout << pCur->Last_Name << " ";
+		wcout << pCur->Gender << " ";
+		wcout << pCur->DateOfBirth.c_str() << " ";
+		wcout << pCur->Social_ID << " ";
+		wcout << pCur->username.c_str() << " ";
+		wcout << pCur->password.c_str() << " ";
+		wcout << pCur->Class.c_str() << " ";
+		wcout << pCur->SchoolYear << endl;
+		pCur = pCur->pNext;
+	}
+}

@@ -62,6 +62,5 @@ int wmain()
 	DeleteListCourseInfo(pHead);
 	wcout << L"Do you want to view the list of courses.";
 	tempI = _getch();
-	if (tempI == 49) ViewListCourse(1, 1);
 	return 0;
 }

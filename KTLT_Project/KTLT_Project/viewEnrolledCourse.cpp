@@ -28,6 +28,7 @@ void getData(wstring str, Course*& pHead) {//get data from file: student id and 
 	ch = str[i];
 	while (ch != ',') { i++; ch = str[i]; }
 	lc2 = i;
+	temp = 0;
 	for (i = lc1 + 1; i < lc2; i++) temp += str[i];
 	pHead->ID = temp;
 }

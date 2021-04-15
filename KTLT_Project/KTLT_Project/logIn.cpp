@@ -82,7 +82,8 @@ void SetUp(wstring str, Student*& pHead)
 	lc2 = i;
 	tempString = "";
 	for (i = lc1 + 1; i < lc2; i++) tempString += str[i];
-	pHead->Gender = tempString;
+	if (tempString == "Male")
+		pHead->Gender = 1; else pHead->Gender = 0;
 
 	//Get Date of Birth
 	lc1 = lc2;
@@ -162,3 +163,4 @@ void login(Student* pHead) {
 
 	}
 	cout << "Invalid login, please try again !" << endl;
+}
