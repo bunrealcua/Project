@@ -1,4 +1,6 @@
 ﻿#include"StructStudent.h"
+#include"Staff.h"
+#include"Student.h"
 #include<iostream>
 #include<io.h>
 #include<fcntl.h>
@@ -57,7 +59,7 @@ int wmain()
 
 	} while (tempI == 49);
 	SetUpSemester1(schoolyear, pHead);
-	DeleteListCourse(pHead);
+	DeleteListCourseInfo(pHead);
 	wcout << L"Do you want to view the list of courses.";
 	tempI = _getch();
 	if (tempI == 49) ViewListCourse(1, 1);

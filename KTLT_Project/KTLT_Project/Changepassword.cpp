@@ -1,5 +1,6 @@
 #include "StructStudent.h"
-
+#include"Student.h"
+#include"Staff.h"
 void changepass(Student*& pHead)
 {
 	string s;

@@ -1,4 +1,5 @@
 #include"StructStudent.h"
+#include"Student.h"
 #include<iostream>
 #include<fstream>
 #include<string>

@@ -1,5 +1,5 @@
 #include "StructStudent.h"
-
+#include"Student.h"
 void input(Student*& pHead)
 {
 	cout << "Input your first name: ";

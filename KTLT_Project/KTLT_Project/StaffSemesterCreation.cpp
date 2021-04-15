@@ -1,4 +1,5 @@
 ﻿#include"StructStudent.h"
+#include"Staff.h"
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -30,7 +31,7 @@ void SetUpSemester1(int schooyear, CourseInfo* pHead)
 	FileOut.close();
 
 }
-void DeleteListCourse(CourseInfo*& pHead)
+void DeleteListCourseInfo(CourseInfo*& pHead)
 {
 	if (pHead == nullptr) return;
 	CourseInfo* pCur = nullptr;

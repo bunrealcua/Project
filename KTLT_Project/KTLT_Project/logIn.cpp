@@ -1,4 +1,5 @@
 #include"StructStudent.h"
+#include"Student.h"
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -143,6 +144,7 @@ void SetUp(wstring str, Student*& pHead)
 	x = atoi(tempInt.c_str());
 	pHead->SchoolYear = x;
 }
+
 void login(Student* pHead) {
 	string un;
 	string pass;
