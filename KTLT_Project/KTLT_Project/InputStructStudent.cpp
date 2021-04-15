@@ -1,4 +1,4 @@
-#include"StructStudent.h"
+﻿#include"StructStudent.h"
 #include"Student.h"
 #include<iostream>
 #include<fstream>
@@ -9,6 +9,7 @@
 #include<codecvt>
 using namespace std;
 
+/*Hàm này để đọc từ file các chuỗi và chia nhỏ thành các thành phần của struct student*/
 void Input(string path, wstring& str, Student*& pHead)
 {
 	wifstream FileIn;
@@ -40,6 +41,7 @@ void Input(string path, wstring& str, Student*& pHead)
 	FileIn.close();
 }
 
+/*Hàm này để chia chuỗi str thành các thành phần của struct Student*/
 void SetUp(wstring str, Student*& pHead)
 {
 	int lc1 = 1, lc2 = 0, i = 2;

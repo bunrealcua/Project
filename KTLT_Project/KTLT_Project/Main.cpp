@@ -58,7 +58,7 @@ int wmain()
 		tempI = _getch();
 
 	} while (tempI == 49);
-	SetUpSemester1(schoolyear, pHead);
+	SetUpSemester(1,1 ,pHead);
 	DeleteListCourseInfo(pHead);
 	wcout << L"Do you want to view the list of courses.";
 	tempI = _getch();
