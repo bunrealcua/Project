@@ -160,7 +160,6 @@ void login(Student* pHead) {
 			return;
 		}
 		pCur = pCur->pNext;
-
 	}
 	cout << "Invalid login, please try again !" << endl;
 }

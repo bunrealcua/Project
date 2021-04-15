@@ -83,7 +83,7 @@ void DeleteListCourse(Course*& pHead)
 }
 
 /*Hàm xem danh sách các course đã nhập*/
-void ViewListCourse(int schoolyear, int semester,Course* pHead)
+void ViewListCourse(int schoolyear, int semester,Course*&pHead)
 {
 	string str = "";
 	/*Lấy đường dẫn để đọc file*/
