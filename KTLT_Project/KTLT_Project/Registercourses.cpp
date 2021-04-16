@@ -11,6 +11,9 @@ void registercourse(Student* pHeadStudent, Course* pHeadCourse);
 void Register(int schoolyear, int semester, Student* pHead);
 void CopyCourse(Course* CourseA, Course* CourseB);
 void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Course* headCourse);
+void UpdateCourseSelection(int schoolyear, int semester, Student* headStudent);
+void DeleteACourseSelection(int schoolyear, int semester, Student* headStudent);
+
 
  void registercourse(Student* pHeadStudent, Course* pHeadCourse)
 
@@ -170,3 +173,14 @@ void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Cours
 
 	 FileOut.close();
  }
+
+ /*Sau khi log out, sinh viên có nhu cầu log in và thay đổi đăng ký học phần hoặc xóa 1 số học phần*/
+/*Hàm để sinh viên thay đổi, update lựa chọn.*/
+ void UpdateCourseSelection(int schoolyear, int semester, Student* headStudent)
+ {
+
+ }
+/*Hàm để sinh viên xóa 1 course.*/
+void DeleteACourseSelection(int schoolyear, int semester, Student*headStudent)
+{}
+ 
