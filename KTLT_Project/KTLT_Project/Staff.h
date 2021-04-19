@@ -20,5 +20,5 @@ void AddCourseSemester(int schoolyear, int semester, CourseInfo* pHead); /*Hàm 
 void ChangeCourseToCourseInfo(Course*& pHeadCourse, CourseInfo*& pHeadCourseInfo);/*Hàm chuyển đối struct Course sang struct CourseInfo*/
 void UpdateCourse(int schoolyear, int semester, int k, Course*& pHead);/*Hàm cập nhật course*/
 void DeleteACourse(int schoolyear, int semester, int k, Course*& pHead);/*Hàm xóa course*/
+void Realtime();
 #endif
-
