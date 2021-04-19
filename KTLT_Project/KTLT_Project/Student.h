@@ -1,6 +1,8 @@
 #ifndef KTLT
 #define KTLT
-#include"Student.h"
+#include<iostream>
+
+using namespace std;
 
 struct Student {
 	int ID; wstring First_Name;
@@ -10,6 +12,7 @@ struct Student {
 	string Class; int SchoolYear; Student* pNext;
 };
 
+struct MaSo { int ID; MaSo* next; };
 
 
 // student
