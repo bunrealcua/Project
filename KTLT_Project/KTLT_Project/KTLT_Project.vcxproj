@@ -143,6 +143,7 @@
     <ClCompile Include="course.cpp" />
     <ClCompile Include="InputStructStudent.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Realtime.cpp" />
     <ClCompile Include="Registercourses.cpp" />
     <ClCompile Include="Signup.cpp" />
     <ClCompile Include="logIn.cpp" />
