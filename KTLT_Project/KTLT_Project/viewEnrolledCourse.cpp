@@ -59,7 +59,7 @@ void getData(string str, MaSo*& pHead) {
 
 /*Hàm này xác định chuỗi có MSSV đúng với MSSV được nhập từ bàn phím*/
 /*File được đọc là Registration.txt*/
-
+ 
 void viewEnrolledCourses(int schoolyear, int semester, int tempInput ) {
 	/*tempInput được nhập từ bàn phím sẵn trước rồi. Hihi:))*/
 	/*Mở file Registration*/
