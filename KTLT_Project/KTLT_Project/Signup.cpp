@@ -1,5 +1,11 @@
-#include "StructStudent.h"
+﻿#include "StructStudent.h"
 #include"Student.h"
+#include"Staff.h"
+
+void signUpStudent(Student*& pHead);
+void input(Student*& pHead);
+void signUpStaff(Staff& s);
+void SaveStaffAccount(string path, Staff s);
 
 void input(Student*& pHead)
 {
@@ -23,7 +29,9 @@ void input(Student*& pHead)
 	cin >> pHead->SchoolYear;
 }
 
-void Signup(Student*& pHead)
+/*Không có đăng ký sinh viên vì tài khoản sinh viên được tạo sẵn*/
+/*Chỉ có đăng ký/ tạo tài khoản cho staff thôi.*/
+void signUpStudent(Student*& pHead)
 {
 	pHead = nullptr;
 	int t;
@@ -46,3 +54,29 @@ void Signup(Student*& pHead)
 		pCur->pNext = nullptr;
 	}
 }
+
+/*Hàm tạo tài khoản mới cho staff*/
+void  signUpStaff(Staff& s)
+{
+	string str = "";
+	cout << "Creat a new staff account!";
+	cout << "Username: "; getline(cin, str); s.username = str;
+	cout << "Password: "; getline(cin, str); s.password = str;
+}
+
+/*Hàm để lưu các tài khoản mới tạo của staff vào một file.*/
+void SaveStaffAccount(string path, Staff s)
+{
+	ofstream FileOut;
+	string temp="";
+	FileOut.open(path);
+	if (FileOut.is_open() == false) cout << "Can't save new staff account!!";
+	else {
+		FileOut.seekp(ios::end);
+		FileOut << endl;
+		FileOut << s.username << "," << s.password;
+		cout << "Successfully!" << endl;
+	}
+	FileOut.close();
+}
+

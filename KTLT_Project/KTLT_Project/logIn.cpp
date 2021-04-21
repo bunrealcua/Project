@@ -9,7 +9,8 @@
 #include<codecvt>
 using namespace std;
 
-void login(Student* pHead);
+void loginStudent(Student* pHead, string username, string pass);
+void loginStaff(string path, string Username, string Password);
 
 /*void login(Student* pHead) {
 	string un;
@@ -31,20 +32,34 @@ void login(Student* pHead);
 */
 
 /*Thử hàm log in này xem*/
-void login(Student* pHead) {
-	string username;
-	string pass;
-	cout << "Insert your username, please!  " ;
-	getline(cin, username);
-	cout << "Insert your password, please! " ;
-	getline(cin, pass);
+void loginStudent(Student* pHead,string username, string pass) {
+
 	Student* pCur = pHead;
 	while (pCur != nullptr && pCur->username!=username ) pCur = pCur->pNext;
 	if (pCur != nullptr)
 	{
 		if (pCur->password != pass) cout << "Wrong password!";
-		else cout << "Log in successfully";
+		else cout << "Logging In successfully";
 	}
 	else
 	cout << "Invalid login, please try again !" << endl;
+}
+
+/*Hàm kiểm tra xem staff login có đúng hay không!! từ đường dẫn path */
+void loginStaff(string path, string Username, string Password)
+{
+	ifstream FileIn;
+	FileIn.open(path);
+	string strInput = Username + "," + Password;
+	string temp = "";
+	if (FileIn.is_open() == false) cout << "Error file opening. Can't check login!"<<endl;
+	else {
+		getline(FileIn, temp);
+		while (!FileIn.eof() && temp != "") {
+			if (temp == strInput) { cout << "Logging In Successfully!"<<endl; return; }
+			getline(FileIn, temp);
+		}
+		cout << "Your username or password is not correct!" << endl;
+	}
+	FileIn.close();
 }

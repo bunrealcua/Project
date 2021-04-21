@@ -18,7 +18,11 @@ int wmain()
 {
 	/*******Đăng nhập để biết*******/
 	/*Làm sao log in, log out được nhỉ, đối với giáo viên, à nếu log out thì log out thôi. Có thể hàm tạo tài khoản cho staff*/
+	/*Trong quá trình chương trình chạy, có hai biến là Staff và Student để mà giữ trạng thái tài khoản người dùng đang sử dụng, có thể là staff hoặc có thể là sv*/
 	/*Nếu log out thì màn hình vẫn màu đen console thôi chứ không có trở về lại return 0*/
+
+
+
 
 
 	/******Công việc của staff nè!******/
@@ -48,7 +52,7 @@ int wmain()
 	/*Student* pHead;
 	Signup(pHead);*/
 	// Hàm này để thêm course, view course.
-	int schoolyear;
+	/*int schoolyear;
 	_setmode(_fileno(stdin), _O_U16TEXT);
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	wcout << L"Semester 1 is coming. Input course in semester 1." << endl;
@@ -94,6 +98,6 @@ int wmain()
 	SetUpSemester(1,1 ,pHead);
 	DeleteListCourseInfo(pHead);
 	wcout << L"Do you want to view the list of courses.";
-	tempI = _getch();
+	tempI = _getch();*/
 	return 0;
 }
