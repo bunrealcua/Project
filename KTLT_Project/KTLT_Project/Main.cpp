@@ -10,9 +10,41 @@
 #include<conio.h>
 using namespace std;
 
-
+/*Làm sao để làm cái session đây.*/
+/*Session dùng thư viện ctime để lấy thời gian nhe.*/
+/*Vào thay đổi hàm thời gian.*/
+struct Session { tm time; };
 int wmain()
 {
+	/*******Đăng nhập để biết*******/
+	/*Làm sao log in, log out được nhỉ, đối với giáo viên, à nếu log out thì log out thôi. Có thể hàm tạo tài khoản cho staff*/
+	/*Nếu log out thì màn hình vẫn màu đen console thôi chứ không có trở về lại return 0*/
+
+
+	/******Công việc của staff nè!******/
+	/*Task Tạo năm học mới*/
+	/*Nhận file csv. Đọc và tạo ra các file csv tương ứng là từng loại lớp APCS,CLC,CNTT,... trong file schoolyear1*/
+	/*Nhập thời gian học kì 1, học kì 2, học kì 3.*/
+	/*Khi tạo course thì mặc định là course vừa tạo. Giáo vụ log in, log out thì vẫn là học kì đó. Có thể có hàm switch để chuyển qua lại giữa các học kì*/
+	/*Kiểm tra cuối kì, làm sao để kiểm tra thời gian cuối kì nhỉ*/
+	/*View danh sách các lớp*/
+	/*View danh sách học sinh trong một lớp*/
+	/*View danh sách khóa học*/
+	/*View danh sách học sinh trong một course*/
+	/*... rồi thao tác xóa, update thông tin khóa học đó.*/
+	/*Cuối kì chưa làm được*/
+
+
+
+	/******Công việc của sinh viên*****/
+	/*Hàm nhập thời gian sẽ hoạt động mỗi lần sinh viên log in để kiểm tra đã quá thời hạn đănng kí chưa*/
+	/*Đăng kí khóa học nè.*/
+	/*Xóa khóa học nè*/
+	/*Xem danh sách khóa học đăng kí nè.*/
+	/*Sau khi thời hạn đăng kí kết thúc thì có thể xem danh sách các khóa học đã đăng kí*/
+
+	/*Tạm thời nếu làm xong chừng này thì ổn vailoz*/
+
 	/*Student* pHead;
 	Signup(pHead);*/
 	// Hàm này để thêm course, view course.

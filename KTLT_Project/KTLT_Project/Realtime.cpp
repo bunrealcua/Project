@@ -1,6 +1,7 @@
 #include "StructStudent.h"
 #include"Student.h"
 #include"Staff.h"
+#include<ctime>
 void Realtime()
 {
 	__time32_t k = time(0);

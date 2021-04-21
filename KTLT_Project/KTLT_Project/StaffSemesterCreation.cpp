@@ -472,3 +472,6 @@ void DeleteACourse(int schoolyear, int semester, int k, Course*& pHead)
 	DeleteListCourse(pCourse);
 	/*Kiểm tra hàm có hoạt động không*/ /*Thành công luôn.*/
 }
+
+
+/*Cần tạo ngày bắt đầu và ngày cuối cùng của thời gian đăng kí học phần.*/
