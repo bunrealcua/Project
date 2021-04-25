@@ -1,5 +1,5 @@
-﻿#ifndef Final_Project
-#define Final_Project
+﻿#ifndef Project
+#define Project
 #include<iostream>
 using namespace std;
 
@@ -27,4 +27,5 @@ void signUpStaff(Staff& s); /*Hàm tạo tài khoản cho staff*/
 void SaveStaffAccount(string path, Staff s);/*Hàm lưu tài khoản mới tạo của staff vào hệ thống*/
 void loginStaff(string path, string Username, string Password,bool& check);/*Hàm kiểm tra staff log in hệ thống có được không*/
 void Realtime();
+
 #endif

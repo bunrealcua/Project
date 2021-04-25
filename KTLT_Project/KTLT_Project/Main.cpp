@@ -1,4 +1,5 @@
 ﻿#include"StructStudent.h"
+#include"Time.h"
 #include"Staff.h"
 #include"Student.h"
 #include<iostream>
@@ -8,6 +9,7 @@
 #include<codecvt>
 #include<string>
 #include<conio.h>
+#include<ctime>
 
 using namespace std;
 
@@ -17,8 +19,20 @@ using namespace std;
 struct Session { tm time; };
 int wmain()
 {
+	
+
 	string path = "D:\\InputProject\\StaffAccount.txt";
 	int button = 0;
+	/*****Danh sách các biến cần sử dụng trong chương trình ******/
+	/*Set up thời gian của học kì*/
+	tm StartSes1, StartSes2, StartSes3, EndSes1, EndSes2, EndSes3;
+	StartSes1.tm_year = 0; StartSes2.tm_year = 0; StartSes3.tm_year = 0;
+	EndSes1.tm_year = 0;EndSes2.tm_year = 0;EndSes3.tm_year = 0;
+	/*Biến lấy thời gian hiện tại*/
+	tm TimeCur;
+	/*Biến học kì và năm học*/
+	int semester = 0, schoolyear = 0;
+
 	/*******Đăng nhập để biết*******/
 	/*Làm sao log in, log out được nhỉ, đối với giáo viên, à nếu log out thì log out thôi. Có thể hàm tạo tài khoản cho staff*/
 	/*Trong quá trình chương trình chạy, có hai biến là Staff và Student để mà giữ trạng thái tài khoản người dùng đang sử dụng, có thể là staff hoặc có thể là sv*/
@@ -28,6 +42,7 @@ int wmain()
 	wcout << "Are you Staff or Student: (1)Staff or (2)Student"<<endl;
 	button = _getch();
 	/*ASCII code: 1: 49, 2: 50*/
+
 	while (button != 49 && button != 50) button = _getch();
 	
 
@@ -37,7 +52,7 @@ int wmain()
 	if (button == 49) { wcout << L"You are staff!!" << endl;
 	Staff s;
 
-	/*Staff log in hoặc sign up vào hệ thống*/
+	/*Staff log izn hoặc sign up vào hệ thống*/
 	int option = 0;
 	wcout << L"Do you want: (1) Log in to system! or (2) Sign up an account!"<<endl;
 	/*Dùng option để làm nút chọn luôn.*/
@@ -61,16 +76,28 @@ int wmain()
 		SaveStaffAccount(path, s);
 	}
 		
-
-	wcout << L"Semester 1 is coming. Input course in semester 1." << endl;
-	CourseInfo *pHead = nullptr;
-	SetUpSemester(1, 1, pHead);
-	}
 	/*Task Tạo năm học mới*/
+	
+
+	}
+	
 	/*Nhận file csv. Đọc và tạo ra các file csv tương ứng là từng loại lớp APCS,CLC,CNTT,... trong file schoolyear1*/
-	/*Nhập thời gian học kì 1, học kì 2, học kì 3.*/
+	/*Nhập thời gian học kì 1, học kì 2, học kì 3. Chỉ nhập một lần đầu tiên.*/
+	if (StartSes1.tm_year == 0 || StartSes2.tm_year == 0 || StartSes3.tm_year == 0 || EndSes1.tm_year == 0 || EndSes2.tm_year == 0 || EndSes3.tm_year == 0)
+		SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
+	/*Xác định thời gian hiện tại*/
+	/*Xác định học kì và năm học*/
+	/*Cập nhật lại học kì nếu thời gian quá năm học*/
+	time_t now = time(0);
+	localtime_s(&TimeCur, &now);
+	while (isOutOfDate(TimeCur, StartSes1, EndSes3) == false) SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
+	if (TimeCur.tm_mon >= StartSes3.tm_mon) semester = 3;
+	else if (TimeCur.tm_mon >= StartSes2.tm_mon) semester = 2;
+	else semester = 1;
+	schoolyear = 1;
 	/*Khi tạo course thì mặc định là course vừa tạo. Giáo vụ log in, log out thì vẫn là học kì đó. Có thể có hàm switch để chuyển qua lại giữa các học kì*/
 	/*Kiểm tra cuối kì, làm sao để kiểm tra thời gian cuối kì nhỉ*/
+	/*Thêm thời hạn (ngày bắt đầu/ngày kết thúc) đăng kí khóa học cho sinh viên*/
 	/*View danh sách các lớp*/
 	/*View danh sách học sinh trong một lớp*/
 	/*View danh sách khóa học*/
@@ -87,6 +114,7 @@ int wmain()
 	/*Xóa khóa học nè*/
 	/*Xem danh sách khóa học đăng kí nè.*/
 	/*Sau khi thời hạn đăng kí kết thúc thì có thể xem danh sách các khóa học đã đăng kí*/
+	/*Cuối kỳ thì xem kết quả học phần của mình nè.*/
 
 	/*Tạm thời nếu làm xong chừng này thì ổn vailoz*/
 
