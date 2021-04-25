@@ -8,6 +8,7 @@
 #include<codecvt>
 #include<string>
 #include<conio.h>
+
 using namespace std;
 
 /*Làm sao để làm cái session đây.*/
@@ -16,16 +17,55 @@ using namespace std;
 struct Session { tm time; };
 int wmain()
 {
+	string path = "D:\\InputProject\\StaffAccount.txt";
+	int button = 0;
 	/*******Đăng nhập để biết*******/
 	/*Làm sao log in, log out được nhỉ, đối với giáo viên, à nếu log out thì log out thôi. Có thể hàm tạo tài khoản cho staff*/
 	/*Trong quá trình chương trình chạy, có hai biến là Staff và Student để mà giữ trạng thái tài khoản người dùng đang sử dụng, có thể là staff hoặc có thể là sv*/
 	/*Nếu log out thì màn hình vẫn màu đen console thôi chứ không có trở về lại return 0*/
-
-
+	
+	/*Xác định là staff hay là student.*/
+	wcout << "Are you Staff or Student: (1)Staff or (2)Student"<<endl;
+	button = _getch();
+	/*ASCII code: 1: 49, 2: 50*/
+	while (button != 49 && button != 50) button = _getch();
+	
 
 
 
 	/******Công việc của staff nè!******/
+	if (button == 49) { wcout << L"You are staff!!" << endl;
+	Staff s;
+
+	/*Staff log in hoặc sign up vào hệ thống*/
+	int option = 0;
+	wcout << L"Do you want: (1) Log in to system! or (2) Sign up an account!"<<endl;
+	/*Dùng option để làm nút chọn luôn.*/
+	option = _getch();
+	/*ASCII code: 1: 49, 2: 50*/
+	while (option != 49 && option != 50) option = _getch();
+	
+	/*Nếu là log in hệ thống*/
+	bool check = false;/*Kiểm tra log in hệ thống có được chưa*/
+	string user, password;
+	while (option == 49 && check!=true) {
+		wcout << L"Username: "; getline(cin, user);
+		wcout << L"Password: "; getline(cin, password);
+		loginStaff(path, user, password,check);
+
+	}
+
+	/*Nếu là tạo tài khoản trong hệ thống*/
+	if (option == 50) { 
+		signUpStaff(s);
+		SaveStaffAccount(path, s);
+	}
+		
+
+	wcout << L"Semester 1 is coming. Input course in semester 1." << endl;
+	CourseInfo *pHead = nullptr;
+	SetUpSemester(1, 1, pHead);
+	}
 	/*Task Tạo năm học mới*/
 	/*Nhận file csv. Đọc và tạo ra các file csv tương ứng là từng loại lớp APCS,CLC,CNTT,... trong file schoolyear1*/
 	/*Nhập thời gian học kì 1, học kì 2, học kì 3.*/
@@ -41,6 +81,7 @@ int wmain()
 
 
 	/******Công việc của sinh viên*****/
+	if (button == 50) wcout << L"You are student!!" << endl;
 	/*Hàm nhập thời gian sẽ hoạt động mỗi lần sinh viên log in để kiểm tra đã quá thời hạn đănng kí chưa*/
 	/*Đăng kí khóa học nè.*/
 	/*Xóa khóa học nè*/
@@ -49,55 +90,12 @@ int wmain()
 
 	/*Tạm thời nếu làm xong chừng này thì ổn vailoz*/
 
-	/*Student* pHead;
-	Signup(pHead);*/
-	// Hàm này để thêm course, view course.
-	/*int schoolyear;
-	_setmode(_fileno(stdin), _O_U16TEXT);
-	_setmode(_fileno(stdout), _O_U16TEXT);
-	wcout << L"Semester 1 is coming. Input course in semester 1." << endl;
-	wcout << L"School year: "; wcin >> schoolyear;
-	short tempI;
-	wstring wtemp = L"", wstr = L"";
+	
+	
+	
+	
+	
 
-	// Nhập các course.
-	CourseInfo* pHead = nullptr, * pCur = nullptr;
-	do {
-		wstr = L"";
-		wcout << L"Course ID: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L',';
-		wcout << L"Course name: "; wcin.ignore(); getline(wcin, wtemp);
-		wstr += wtemp + L",";
-		wcout << L"Lecturer: "; fflush(stdin); getline(wcin, wtemp);
-		wstr += wtemp + L",";
-		wcout << L"Number of credits: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L",";
-		wcout << L"Student limit: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L",";
-		wcout << L"Week day(1 for Sunday): "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L",";
-		wcout << L"Session: "; wcin >> tempI;
-		wstr += to_wstring(tempI); // Check lại session sẽ nhập gì.
-		if (pHead == nullptr) {
-			pHead = new CourseInfo;
-			pHead->info = wstr;
-			pHead->next = nullptr;
-			pCur = pHead;
-		}
-		else {
-			pCur->next = new CourseInfo;
-			pCur = pCur->next;
-			pCur->info = wstr;
-			pCur->next = nullptr;
-		}
-		wcout << endl;
-		wcout << L"Add a new course.?? 1: Yes or 0: No" << endl;
-		tempI = _getch();
 
-	} while (tempI == 49);
-	SetUpSemester(1,1 ,pHead);
-	DeleteListCourseInfo(pHead);
-	wcout << L"Do you want to view the list of courses.";
-	tempI = _getch();*/
 	return 0;
 }

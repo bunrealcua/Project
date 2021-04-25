@@ -40,13 +40,69 @@ void SetUpSemester(int schoolyear,int semester, CourseInfo* pHead)
 				else if (semester == 2) str = "D:\\InputProject\\SchoolYear4\\CourseSemester2.txt";
 				else str = "D:\\InputProject\\SchoolYear4\\CourseSemester3.txt";
 			}
+	
+	/*Tạo thông tin khóa học trong một học kì*/
+	/*Setup để đọc ghi tiếng việt*/
+	_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);
+
+	/*Nhập thông tin khóa học và lưu vào 1 linked list*/
+	wstring wstr, wtemp;
+	CourseInfo*ptemp = nullptr;
+	int tempI = 0;/*biến lưu thông tin số của khóa học + nút nhận của chương trình*/
+	do {
+		wstr = L"";
+		wcout << L"Course ID: "; wcin >> tempI;
+		wstr += to_wstring(tempI) + L',';
+		wcout << L"Course name: "; wcin.ignore(); getline(wcin, wtemp);
+		wstr += wtemp + L",";
+		wcout << L"Lecturer: "; fflush(stdin); getline(wcin, wtemp);
+		wstr += wtemp + L",";
+		wcout << L"Number of credits: "; wcin >> tempI;
+		wstr += to_wstring(tempI) + L",";
+		wcout << L"Student limit: "; wcin >> tempI;
+		wstr += to_wstring(tempI) + L",";
+		wcout << L"Week day: "; wcin >> tempI;
+		wstr += to_wstring(tempI) + L",";
+
+		wcout << L"Session day 1 (Mon/Tue/Wed/Thu/Fri/Sat/Sun): "; wcin.ignore();getline(wcin, wtemp);
+		wstr += wtemp + L",";
+		wcout << L"Session time day 1 (hh:mm): "; getline(wcin, wtemp);
+		wstr += wtemp + L",";
+		wcout << L"Session day 2 (Mon/Tue/Wed/Thu/Fri/Sat/Sun): "; getline(wcin, wtemp);
+		wstr += wtemp + L",";
+		wcout << L"Session time day 2 (hh:mm):  ";fflush(stdin); getline(wcin, wtemp);
+		wstr += wtemp;
+
+		if (pHead == nullptr) {
+			pHead = new CourseInfo;
+			pHead->info = wstr;
+			pHead->next = nullptr;
+			ptemp = pHead;
+		}
+		else {
+			ptemp->next = new CourseInfo;
+			ptemp = ptemp->next;
+			ptemp->info = wstr;
+			ptemp->next = nullptr;
+		}
+		wcout << endl;
+		wcout << L"Add a new course.?? 1: Yes or 0: No" << endl;
+		tempI = _getch();
+
+	} while (tempI == 49);
+
+	
 	/*Mở file với chế độ xóa hết nội dung file khi mở ra. Mục đích để tránh ghi đè lên nội dung cũ*/
 	wofstream FileOut;
-	FileOut.open(str,ios::trunc);
+	FileOut.open(str);
 	/*Set up để đọc chữ Tiếng Việt utf8*/
 	locale loc(locale(), new codecvt_utf8<wchar_t>);
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	FileOut.imbue(loc);
+
+	// Đưa con trỏ file đến cuối file
+	FileOut.seekp(0, ios::end);
 
 	/*Viết nội dung khóa học vào file*/
 	CourseInfo* pCur = pHead;
@@ -55,13 +111,12 @@ void SetUpSemester(int schoolyear,int semester, CourseInfo* pHead)
 		pCur = pCur->next;
 	}
 	FileOut.close();
-
+	DeleteListCourseInfo(pHead);
 }
 
 /*Hàm có tác dụng xóa linked list CourseInfo*/
 void DeleteListCourseInfo(CourseInfo*& pHead)
 {
-	if (pHead == nullptr) return;
 	CourseInfo* pCur = nullptr;
 	while (pHead != nullptr) {
 		pCur = pHead;
@@ -122,8 +177,9 @@ void ViewListCourse(int schoolyear, int semester,Course*&pHead)
 		/*Mở hàm đọc thôi nào!!*/
 		wstring wstr;
 		Course * pCur = nullptr;
+		getline(FileIn, wstr);
 		while (!FileIn.eof()) {
-			getline(FileIn, wstr);
+			
 			if (wstr == L"") break;
 			if (pHead == nullptr) {
 				pHead = new Course;
@@ -138,10 +194,16 @@ void ViewListCourse(int schoolyear, int semester,Course*&pHead)
 				SetUpInfoCourse(wstr, pCur);
 				pCur->next = nullptr;
 			}
+			getline(FileIn, wstr);
 		}
 		pCur = pHead;
+		/*Setup để chuyển đổi giữa string và wstring :))*/
+		wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
+		;
 		while (pCur != nullptr) {
-			wcout << pCur->ID << L" " << pCur->Name << L" " << pCur->Lecturer << L" " << pCur->Credits << L" " << pCur->StudentLimit << L" " << pCur->Weekday << L" " << pCur->Session << endl;
+			wcout << pCur->ID << L" " << pCur->Name << L" ";
+			wcout << pCur->Lecturer << L" " << pCur->Credits << L" " << pCur->StudentLimit << L" " << pCur->Weekday << L" ";
+			wcout<< convert.from_bytes(pCur->SessionDay1) <<L" "<< convert.from_bytes(pCur->Time1)<<L" "<< convert.from_bytes(pCur->SessionDay2)<< convert.from_bytes(pCur->Time2) << endl;
 			pCur = pCur->next;
 		}
 		while (pHead != nullptr) {
@@ -163,6 +225,7 @@ void SetUpInfoCourse(wstring& wstr, Course*& pHead)
 	wstring temp = L"";
 	string strtemp;
 	int tempI;
+	/*Setup để chuyển đổi giữa string và wstring :))*/
 	wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
 	// Get the ID
 	while (ch != L',') { lc2++; ch = wstr[lc2]; }
@@ -213,13 +276,35 @@ void SetUpInfoCourse(wstring& wstr, Course*& pHead)
 	pHead->Weekday = tempI;
 	lc1 = lc2;
 	lc2++; ch = wstr[lc2];
-	// Get the course session.
+	// Get the course session day 1.
+	temp = L"";
+	while (ch != L',') { lc2++; ch = wstr[lc2]; }
+	for (int j = lc1 + 1;j < lc2;j++) temp += wstr[j];
+	strtemp = convert.to_bytes(temp);
+	pHead->SessionDay1 = strtemp;
+	lc1 = lc2;
+	lc2++; ch = wstr[lc2];
+	// Get the course session time day 1.
+	temp = L"";
+	while (ch != L',') { lc2++; ch = wstr[lc2]; }
+	for (int j = lc1 + 1;j < lc2;j++) temp += wstr[j];
+	strtemp = convert.to_bytes(temp);
+	pHead->Time1 = strtemp;
+	lc1 = lc2;
+	lc2++; ch = wstr[lc2];
+	// Get the course session day 2.
+	temp = L"";
+	while (ch != L',') { lc2++; ch = wstr[lc2]; }
+	for (int j = lc1 + 1;j < lc2;j++) temp += wstr[j];
+	strtemp = convert.to_bytes(temp);
+	pHead->SessionDay2 = strtemp;
+	lc1 = lc2;
+	lc2++; ch = wstr[lc2];
+	// Get the course session time day 2.
 	temp = L"";
 	for (int j = lc1 + 1;j < length;j++) temp += wstr[j];
 	strtemp = convert.to_bytes(temp);
-	tempI = atoi(strtemp.c_str());
-	pHead->Session = tempI;
-
+	pHead->Time2 = strtemp;
 }
 
 /*Hàm chuyển struct Course sang CourseInfo. Mục đích để thuận tiện ghi và đọc file.*/
@@ -229,10 +314,16 @@ void ChangeCourseToCourseInfo(Course*& pHeadCourse, CourseInfo*& pHeadCourseInfo
 	wstring str = L"";
 	Course* pCurCourse = pHeadCourse;
 	CourseInfo* pCurInfo = nullptr;
+	/*Setup để chuyển đổi giữa string và wstring :))*/
+	wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
 	while (pCurCourse != nullptr) {
 		str = L"";
 		/*Ghép các thành phần lại thành 1 chuỗi*/
-		str += to_wstring(pCurCourse->ID) + L',' + pCurCourse->Name + L',' + pCurCourse->Lecturer + L',' + to_wstring(pCurCourse->Credits) + L',' + to_wstring(pCurCourse->StudentLimit) + L',' + to_wstring(pCurCourse->Weekday) + L',' + to_wstring(pCurCourse->Session);
+		str += to_wstring(pCurCourse->ID) + L',' + pCurCourse->Name + L',';
+		str += pCurCourse->Lecturer + L',' + to_wstring(pCurCourse->Credits);
+		str += L',' + to_wstring(pCurCourse->StudentLimit) + L',' + to_wstring(pCurCourse->Weekday)+L',';
+		str+=convert.from_bytes(pCurCourse->SessionDay1)+L","+ convert.from_bytes(pCurCourse->Time1) + L",";
+		str += convert.from_bytes(pCurCourse->SessionDay2) + L"," + convert.from_bytes(pCurCourse->Time2) ;
 		if (pHeadCourseInfo == nullptr) {
 			pHeadCourseInfo = new CourseInfo;
 			pHeadCourseInfo->info = str;
@@ -330,6 +421,7 @@ void UpdateCourse(int schoolyear, int semester, int k, Course*& pHead)
 	// Set up để lấy chữ cái Tiếng Việt utf8
 	_setmode(_fileno(stdin), _O_U16TEXT);
 	_setmode(_fileno(stdout), _O_U16TEXT);
+	wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
 	locale loc(locale(), new codecvt_utf8<wchar_t>);
 
 
@@ -410,15 +502,55 @@ void UpdateCourse(int schoolyear, int semester, int k, Course*& pHead)
 		wcin >> pCur->Weekday;
 	}
 
-	/*Update Course Session*/
-	wcout << "Course Session: " << pCur->Session << " Update: Type Y/N (Yes or No)";
+	wstring wtemp;
+
+	/*Update Course Session Day 1*/
+	wcout << "Course Session Day 1: " << convert.from_bytes(pCur->SessionDay1) << " Update: Type Y/N (Yes or No)";
+	button = _getch();
+	// Kiểm tra nút nhận có gõ đúng hay không.
+	while (button != 89 && button != 78 && button != 110 && button != 121) button = _getch();
+	wcout << endl;
+	
+	if (button == 121 || button == 89) {
+		wcout << "New Course Session: ";
+		getline(wcin, wtemp);
+		pCur->SessionDay1 = convert.to_bytes(wtemp);
+	}
+
+	/*Update Course Session Time 1*/
+	wcout << "Course Session Time Day 1: " << convert.from_bytes(pCur->Time1) << " Update: Type Y/N (Yes or No)";
 	button = _getch();
 	// Kiểm tra nút nhận có gõ đúng hay không.
 	while (button != 89 && button != 78 && button != 110 && button != 121) button = _getch();
 	wcout << endl;
 	if (button == 121 || button == 89) {
 		wcout << "New Course Session: ";
-		wcin >> pCur->Session;
+		getline(wcin, wtemp);
+		pCur->Time1 = convert.to_bytes(wtemp);
+	}
+
+	/*Update Course Session Day 1*/
+	wcout << "Course Session Day 2: " << convert.from_bytes(pCur->SessionDay2) << " Update: Type Y/N (Yes or No)";
+	button = _getch();
+	// Kiểm tra nút nhận có gõ đúng hay không.
+	while (button != 89 && button != 78 && button != 110 && button != 121) button = _getch();
+	wcout << endl;
+	if (button == 121 || button == 89) {
+		wcout << "New Course Session: ";
+		getline(wcin, wtemp);
+		pCur->SessionDay2 = convert.to_bytes(wtemp);
+	}
+
+	/*Update Course Session Time Day 1*/
+	wcout << "Course Session Time Day 2: " << convert.from_bytes(pCur->Time2) << " Update: Type Y/N (Yes or No)";
+	button = _getch();
+	// Kiểm tra nút nhận có gõ đúng hay không.
+	while (button != 89 && button != 78 && button != 110 && button != 121) button = _getch();
+	wcout << endl;
+	if (button == 121 || button == 89) {
+		wcout << "New Course Session: ";
+		getline(wcin, wtemp);
+		pCur->Time2 = convert.to_bytes(wtemp);
 	}
 
 	wcout << "Update successfully." << endl;
@@ -473,5 +605,7 @@ void DeleteACourse(int schoolyear, int semester, int k, Course*& pHead)
 	/*Kiểm tra hàm có hoạt động không*/ /*Thành công luôn.*/
 }
 
-
+void SetUpCourse(Course& pHead) {
+	
+}
 /*Cần tạo ngày bắt đầu và ngày cuối cùng của thời gian đăng kí học phần.*/

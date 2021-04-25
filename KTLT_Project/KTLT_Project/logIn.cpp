@@ -10,7 +10,7 @@
 using namespace std;
 
 void loginStudent(Student* pHead, string username, string pass);
-void loginStaff(string path, string Username, string Password);
+
 
 /*void login(Student* pHead) {
 	string un;
@@ -46,7 +46,7 @@ void loginStudent(Student* pHead,string username, string pass) {
 }
 
 /*Hàm kiểm tra xem staff login có đúng hay không!! từ đường dẫn path */
-void loginStaff(string path, string Username, string Password)
+void loginStaff(string path, string Username, string Password,bool& check)
 {
 	ifstream FileIn;
 	FileIn.open(path);
@@ -54,12 +54,14 @@ void loginStaff(string path, string Username, string Password)
 	string temp = "";
 	if (FileIn.is_open() == false) cout << "Error file opening. Can't check login!"<<endl;
 	else {
-		getline(FileIn, temp);
-		while (!FileIn.eof() && temp != "") {
-			if (temp == strInput) { cout << "Logging In Successfully!"<<endl; return; }
+
+		while (!FileIn.eof()) {
 			getline(FileIn, temp);
+			if (temp == " ") break;
+			if (temp == strInput)  check = true;
 		}
-		cout << "Your username or password is not correct!" << endl;
+		if (check == true) cout << "Logging In successfully!!!" << endl;
+		else cout << "Your usename or password is not correct! Try again." << endl;
 	}
 	FileIn.close();
 }

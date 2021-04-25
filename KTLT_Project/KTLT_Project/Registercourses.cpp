@@ -82,7 +82,10 @@ void SelectCourse(Course* pCourse, Course*& CourseSelect);
 	 CourseB->Credits = CourseA->Credits;
 	 CourseB->StudentLimit = CourseA->StudentLimit;
 	 CourseB->Weekday = CourseA->Weekday;
-	 CourseB->Session = CourseB->Session;
+	 CourseB->SessionDay1 = CourseA->SessionDay1;
+	 CourseB->SessionDay2 = CourseA->SessionDay2;
+	 CourseB->Time1 = CourseA->Time1;
+	 CourseA->Time2 = CourseA->Time2;
  }
 
  /*Hàm từ các course đăng ký, viết vào file registration*/
@@ -196,6 +199,7 @@ void SelectCourse(Course* pCourse, Course*&CourseSelect)
 	int button;
 	Course * CourseCur = nullptr, * CoursePos = nullptr;
 	Course* ptemp = nullptr;
+	Course* CurCheck = nullptr; /*Dùng để kiểm tra có trùng thời gian hay không*/
 	int pos = 0; /*Thứ tự course.*/
 	int max = 0;
 	while (max <= 5) {
@@ -213,11 +217,21 @@ void SelectCourse(Course* pCourse, Course*&CourseSelect)
 			CourseCur = CourseSelect;
 		}
 		else {
-			CourseCur->next = new Course;
-			CourseCur = CourseCur->next;
-			CopyCourse(ptemp, CourseCur);
-			CourseCur->next = nullptr;
+			/*Kiểm tra thời gian có bị trùng hay không đã*/
+			CurCheck = CourseSelect;
+			while (CurCheck != nullptr && CurCheck->SessionDay1 != ptemp->SessionDay1 && CurCheck->Time1 != ptemp->Time1 && CurCheck->SessionDay2 != ptemp->SessionDay2 && CurCheck->Time2 != ptemp->Time2)
+				CurCheck = CurCheck->next;
+			if (CurCheck == nullptr) {
+				CourseCur->next = new Course;
+				CourseCur = CourseCur->next;
+				CopyCourse(ptemp, CourseCur);
+				CourseCur->next = nullptr;
+			}
+			else wcout << "This course can not be selected." << endl;
 		}
+
+
+
 		wcout << L"Successfully!" << endl;
 		/*Cần phải xác định lại update và xóa.*/
 		wcout << L"Option: 1. Select next  2. Select again  3. Done registration"; /*Biến nhận option*/

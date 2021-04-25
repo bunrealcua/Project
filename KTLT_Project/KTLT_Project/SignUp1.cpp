@@ -1,11 +1,13 @@
 ﻿#include "StructStudent.h"
 #include"Student.h"
 #include"Staff.h"
+#include<iostream>
+using namespace std;
+
 
 void signUpStudent(Student*& pHead);
 void input(Student*& pHead);
-void signUpStaff(Staff& s);
-void SaveStaffAccount(string path, Staff s);
+
 
 void input(Student*& pHead)
 {
@@ -59,7 +61,7 @@ void signUpStudent(Student*& pHead)
 void  signUpStaff(Staff& s)
 {
 	string str = "";
-	cout << "Creat a new staff account!";
+	cout << "Creat a new staff account!"<<endl;
 	cout << "Username: "; getline(cin, str); s.username = str;
 	cout << "Password: "; getline(cin, str); s.password = str;
 }
@@ -67,12 +69,12 @@ void  signUpStaff(Staff& s)
 /*Hàm để lưu các tài khoản mới tạo của staff vào một file.*/
 void SaveStaffAccount(string path, Staff s)
 {
-	ofstream FileOut;
-	string temp="";
-	FileOut.open(path);
+	fstream FileOut;
+	string temp = "";
+	FileOut.open(path,ios::out | ios::in);
 	if (FileOut.is_open() == false) cout << "Can't save new staff account!!";
 	else {
-		FileOut.seekp(ios::end);
+		FileOut.seekp(0,ios::end);
 		FileOut << endl;
 		FileOut << s.username << "," << s.password;
 		cout << "Successfully!" << endl;

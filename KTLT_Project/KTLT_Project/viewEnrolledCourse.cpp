@@ -164,12 +164,17 @@ void PrintOutEnrolledCourses(int schoolyear, int semester, MaSo* headMaSo) {
 	/*Dò tìm nếu mà Course nào mà có ID trùng thì in ra.*/
 	MaSo* CurMaSo = headMaSo->next; /*vì node head là MSSV, không phải course ID*/
 	
+	wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
 	while (CurMaSo != nullptr) {
 		/*Kiểm tra mã số khóa học có trùng không*/
 		CurCourse = headCourse;
 		while (CurCourse->ID != CurMaSo->ID) CurCourse = CurCourse->next;
 		/*Xác định được course rồi thì in ra*/
-	wcout <<CurCourse->ID<<L" "<< CurCourse->Name << L" " << CurCourse->Lecturer << L" " << CurCourse->Credits << L" " << CurCourse->StudentLimit<<L" "<<CurCourse->Weekday<<L" "<<CurCourse->Session ;
+		wcout << CurCourse->ID << L" " << CurCourse->Name << L" ";
+		wcout << CurCourse->Lecturer << L" " << CurCourse->Credits << L" ";
+		wcout << CurCourse->StudentLimit << L" " << CurCourse->Weekday << L" ";
+		wcout<< convert.from_bytes(CurCourse->SessionDay1)<< L" "<<convert.from_bytes(CurCourse->Time1)<<L" ";
+		wcout << convert.from_bytes(CurCourse->SessionDay2) << L" " << convert.from_bytes(CurCourse->Time2);
 	CurMaSo = CurMaSo->next;
 	}
 
