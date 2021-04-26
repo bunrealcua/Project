@@ -69,7 +69,7 @@ int wmain()
 		loginStaff(path, user, password,check);
 
 	}
-
+	/*Test*/
 	/*Nếu là tạo tài khoản trong hệ thống*/
 	if (option == 50) { 
 		signUpStaff(s);
