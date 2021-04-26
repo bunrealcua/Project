@@ -151,12 +151,17 @@
     <ClCompile Include="SignUp1.cpp" />
     <ClCompile Include="viewEnrolledCourse.cpp" />
     <ClCompile Include="StaffSemesterCreation.cpp" />
+    <ClCompile Include="visual.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StructStudent.h" />
     <ClInclude Include="Student.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="Time.h" />
+=======
+    <ClInclude Include="visual.h" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
