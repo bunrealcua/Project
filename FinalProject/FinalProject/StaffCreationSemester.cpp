@@ -203,7 +203,7 @@ void ViewListCourse(int schoolyear, int semester, Course*& pHead)
 		while (pCur != nullptr) {
 			wcout << pCur->ID << L" " << pCur->Name << L" ";
 			wcout << pCur->Lecturer << L" " << pCur->Credits << L" " << pCur->StudentLimit << L" " << pCur->Weekday << L" ";
-			wcout << convert.from_bytes(pCur->SessionDay1) << L" " << convert.from_bytes(pCur->Time1) << L" " << convert.from_bytes(pCur->SessionDay2) << convert.from_bytes(pCur->Time2) << endl;
+			wcout << convert.from_bytes(pCur->SessionDay1) << L" " << convert.from_bytes(pCur->Time1) << L" " << convert.from_bytes(pCur->SessionDay2)<<L" " << convert.from_bytes(pCur->Time2) << endl;
 			pCur = pCur->next;
 		}
 		while (pHead != nullptr) {

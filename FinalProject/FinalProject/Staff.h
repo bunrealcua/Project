@@ -13,6 +13,7 @@ struct Course {
 };
 struct CourseInfo { wstring info; CourseInfo* next; };
 struct Staff { string username; string password; };
+struct Class { string data; Class* next; };
 
 void SetUpSemester(int schooyear, int semester, CourseInfo* pHead); /*Hàm tạo danh sách khóa học học kì*/
 void DeleteListCourseInfo(CourseInfo*& pHead); /*Hàm xóa link list CourseInfo*/
@@ -28,4 +29,5 @@ void SaveStaffAccount(string path, Staff s);/*Hàm lưu tài khoản mới tạo
 void loginStaff(string path, string Username, string Password, bool& check);/*Hàm kiểm tra staff log in hệ thống có được không*/
 void Realtime();
 
+void DeleteListClass(Class*& headClass);
 #endif

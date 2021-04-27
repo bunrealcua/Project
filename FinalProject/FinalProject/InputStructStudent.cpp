@@ -16,7 +16,7 @@ void Input(string path, wstring& str, Student*& pHead)
 	FileIn.open(path);
 	const locale utf8_locale(locale(), new codecvt_utf8<wchar_t>());
 	_setmode(_fileno(stdin), _O_U16TEXT);
-	if (FileIn.is_open() == false) cout << "FileIn cannot be opened." << endl; else cout << "FileIn can be opened" << endl;
+	if (FileIn.is_open() == false) cout << "FileIn cannot be opened.";
 	FileIn.imbue(utf8_locale);
 	getline(FileIn, str);
 	Student* pCur = nullptr;

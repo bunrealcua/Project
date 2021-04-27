@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StructStudent.h" />
     <ClInclude Include="Student.h" />
@@ -151,12 +152,15 @@
     <ClCompile Include="InputStructStudent.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Realtime.cpp" />
     <ClCompile Include="RegisterCourses.cpp" />
     <ClCompile Include="SetUpTimeSemester.cpp" />
     <ClCompile Include="SignUp.cpp" />
     <ClCompile Include="StaffCreationSemester.cpp" />
+    <ClCompile Include="ViewClass.cpp" />
     <ClCompile Include="ViewEnrolledCourse.cpp" />
+    <ClCompile Include="ViewStudentInClass.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

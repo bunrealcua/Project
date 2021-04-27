@@ -10,13 +10,13 @@
 #include<string>
 #include<conio.h>
 #include<ctime>
-
+#include<Windows.h>
+#include"Menu.h"
 using namespace std;
 
-/*Làm sao để làm cái session đây.*/
-/*Session dùng thư viện ctime để lấy thời gian nhe.*/
-/*Vào thay đổi hàm thời gian.*/
-struct Session { tm time; };
+void ViewClass(int option, int schoolyear, Student*& headStudent, Class*& headClass);
+void viewStudent_InClass(string data, Student* headStudent);
+
 int wmain()
 {
 
@@ -41,6 +41,7 @@ int wmain()
 	/*Xác định là staff hay là student.*/
 	wcout << "Are you Staff or Student: (1)Staff or (2)Student" << endl;
 	button = _getch();
+	system("cls");
 	/*ASCII code: 1: 49, 2: 50*/
 
 	while (button != 49 && button != 50) button = _getch();
@@ -58,8 +59,10 @@ int wmain()
 		wcout << L"Do you want: (1) Log in to system! or (2) Sign up an account!" << endl;
 		/*Dùng option để làm nút chọn luôn.*/
 		option = _getch();
+		
 		/*ASCII code: 1: 49, 2: 50*/
 		while (option != 49 && option != 50) option = _getch();
+		system("cls");
 
 		/*Nếu là log in hệ thống*/
 		bool check = false;/*Kiểm tra log in hệ thống có được chưa*/
@@ -68,7 +71,6 @@ int wmain()
 			wcout << L"Username: "; getline(cin, user);
 			wcout << L"Password: "; getline(cin, password);
 			loginStaff(path, user, password, check);
-
 		}
 		/*Test*/
 		/*Nếu là tạo tài khoản trong hệ thống*/
@@ -76,7 +78,6 @@ int wmain()
 			signUpStaff(s);
 			SaveStaffAccount(path, s);
 		}
-
 		/*Task Tạo năm học mới*/
 
 
@@ -91,25 +92,65 @@ int wmain()
 	/*Cập nhật lại học kì nếu thời gian quá năm học*/
 	time_t now = time(0);
 	localtime_s(&TimeCur, &now);
+	TimeCur.tm_mon++;
 	while (isOutOfDate(TimeCur, StartSes1, EndSes3) == false) SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
 	if (TimeCur.tm_mon >= StartSes3.tm_mon) semester = 3;
 	else if (TimeCur.tm_mon >= StartSes2.tm_mon) semester = 2;
 	else semester = 1;
-	schoolyear = 1;
+	system("cls");
+
+	/*Xác định năm học :<<*/
+	 SchoolYearMenu( schoolyear);
+
+	/*Show ra cái menu*/
+	wcout << L"Options for schoolyear "<<schoolyear<<"."<<endl;
+	wcout << L"1.View classes" << endl;
+	wcout << L"2.Create/Add courses" << endl;
+	wcout << L"3.View courses" << endl;
+	wcout << L"4.Back" << endl;
+	int option;
+	option = _getch();
+	while (option != 49 && option != 50 && option != 51 && option != 52) option = _getch();
+	if (option == 52) SchoolYearMenu(schoolyear);
+
 	/*Khi tạo course thì mặc định là course vừa tạo. Giáo vụ log in, log out thì vẫn là học kì đó. Có thể có hàm switch để chuyển qua lại giữa các học kì*/
-	/*Kiểm tra cuối kì, làm sao để kiểm tra thời gian cuối kì nhỉ*/
 	/*Thêm thời hạn (ngày bắt đầu/ngày kết thúc) đăng kí khóa học cho sinh viên*/
 	/*View danh sách các lớp*/
+	wcout << L"List of classes in schoolyear (Esc to back) " << schoolyear<<endl;
+	wcout << L"1.APCS" << endl;
+	wcout << L"2.CLC" << endl;
+	wcout << L"3.CNTT" << endl;
+	wcout << L"4.CTDT" << endl;
+	wcout << L"5.VP" << endl;
+	option = _getch();
+	while (option != 49 && option != 50 && option != 51 && option != 52 && option != 53) option = _getch();
+	option = option - 48;
+	Class* headClass = nullptr;
+	Student* headStudent = nullptr;
+
+	ViewClass(option, schoolyear,headStudent,headClass);
+
+
 	/*View danh sách học sinh trong một lớp*/
+	string data;
+	wcout << "View list of student in class: ";
+	getline(cin, data);
+	cout << endl;
+	viewStudent_InClass(data, headStudent);
 	/*View danh sách khóa học*/
+	Course* headCourse = nullptr;
+	ViewListCourse(schoolyear, semester, headCourse);
 	/*View danh sách học sinh trong một course*/
+
 	/*... rồi thao tác xóa, update thông tin khóa học đó.*/
 	/*Cuối kì chưa làm được*/
-
+	DeleteListCourse(headCourse);
+	DeleteListStudent(headStudent);
 
 
 	/******Công việc của sinh viên*****/
 	if (button == 50) wcout << L"You are student!!" << endl;
+	/*Hàm đăng nhập của sinh viên*/
 	/*Hàm nhập thời gian sẽ hoạt động mỗi lần sinh viên log in để kiểm tra đã quá thời hạn đănng kí chưa*/
 	/*Đăng kí khóa học nè.*/
 	/*Xóa khóa học nè*/
