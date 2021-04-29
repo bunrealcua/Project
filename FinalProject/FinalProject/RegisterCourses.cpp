@@ -7,13 +7,7 @@
 
 using namespace std;
 
-void registercourse(Student* pHeadStudent, Course* pHeadCourse);
-void Register(int schoolyear, int semester, Student* pHead);
-void CopyCourse(Course* CourseA, Course* CourseB);
-void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Course* headCourse);
-void UpdateCourseSelection(int schoolyear, int semester, Student* headStudent);
-void DeleteACourseSelection(int schoolyear, int semester, Student* headStudent);
-void SelectCourse(Course* pCourse, Course*& CourseSelect);
+
 
 void registercourse(Student* pHeadStudent, Course* pHeadCourse)
 

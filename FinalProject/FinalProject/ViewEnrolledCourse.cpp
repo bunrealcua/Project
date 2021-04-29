@@ -17,7 +17,7 @@ void viewEnrolledCourses(int schoolyear, int semester, int tempInput);
 
 /*Hàm này có tác dụng đọc chuỗi từ file và gắn cho chuỗi linked list Course. */
 /*Tạo linked list Course sẽ tốn dung lượng vì các thành phần như Lecturer, Name, Session, Weekday không cần thiết dùng*/
-/*Nên dùng một linked list mới ID{ string; ID* next;};*/
+/*Nên dùng một linked list mới MaSo{ int ID; MaSo* next;};*/
 /*node head sẽ là MSSV*/
 void getData(string str, MaSo*& pHead) {
 
