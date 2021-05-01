@@ -34,19 +34,6 @@ void ViewStudentInCourse(int schoolyear, int courseID);/*Ham xem danh sach hoc s
 void DeleteListMaSo(MaSo*& pHead);
 void SeekInfoStudent(int schoolyear, int IDstudent);
 void loginStudent(Student* pHead, string username, string pass);
-/*Những hàm cần thiết để xem các khóa học đã đăng kí*/
-void getData(string str, MaSo*& pHead);
-void readFile(string path1, wstring& str, Course* pHead);
-void DeleteListMaSo(MaSo*& pHead);
-void PrintOutEnrolledCourses(int schoolyear, int semester, MaSo* headMaSo);
-void viewEnrolledCourses(int schoolyear, int semester, int tempInput);
-/*Hàm để sinh viên chọn xóa và update những khóa học mong muốn*/
-void registercourse(Student* pHeadStudent, Course* pHeadCourse);
-void Register(int schoolyear, int semester, Student* pHead);
-void CopyCourse(Course* CourseA, Course* CourseB);
-void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Course* headCourse);
-void UpdateCourseSelection(int schoolyear, int semester, Student* headStudent);
-void DeleteACourseSelection(int schoolyear, int semester, Student* headStudent);
-void SelectCourse(Course* pCourse, Course*& CourseSelect);
+
 #endif
 

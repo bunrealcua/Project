@@ -17,6 +17,237 @@ using namespace std;
 void ViewClass(int option, int schoolyear, Student*& headStudent, Class*& headClass);
 void viewStudent_InClass(string data, Student* headStudent);
 
+/*Hàm để sinh viên chọn xóa và update những khóa học mong muốn*/
+void registercourse(Student* pHeadStudent, Course* pHeadCourse);
+void Register(int schoolyear, int semester, Student* pHead);
+void CopyCourse(Course* CourseA, Course* CourseB);
+void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Course* headCourse);
+void UpdateCourseSelection(int schoolyear, int semester, Student* headStudent);
+void DeleteACourseSelection(int schoolyear, int semester, Student* headStudent);
+void SelectCourse(Course* pCourse, Course*& CourseSelect);
+/*Hàm đăng ký khóa học của sinh viên: biến struct Student + struct Course -> struct mới để lưu vào file ghi*/
+/*Hàm đăng ký có tham biến là năm học + học kỳ + linked list struct Student*/
+void Register(int schoolyear, int semester, Student* pHead)
+{
+	/*Đầu tiên, show ra danh sách các khóa học học kì. Đồng thời có linked list Course*/
+	wcout << L"List of the course in this semester. Please select your courses. (Maximum 5 courses,Minimum 1 course)." << endl;
+	Course* pCourse = nullptr;
+	ViewListCourse(schoolyear, semester, pCourse);
+
+	/*Giả định mỗi sinh viên đều phải chọn ít nhất 1 course.*/
+	Course* CourseCur = nullptr, * CourseSelect = nullptr;
+	SelectCourse(pCourse, CourseSelect);/*Hàm chọn course của sinh viên.*/
+
+	/*Sau khi đăng kí nên show ra list course đã đăng kí*/
+	wcout << L"Here is the course you selected.";
+	CourseCur = CourseSelect;
+	while (CourseCur != nullptr) {
+		wcout << CourseCur->Name << L" by lecturer ";
+		wcout << CourseCur->Lecturer;
+		CourseCur = CourseCur->next;
+	}
+
+	/*Hàm Từ các course đã đăng ký viết vào file.*/
+	SetUpRegistration(schoolyear, semester, pHead, CourseSelect);
+
+	/*Xóa linked list Course*/
+	DeleteListCourse(CourseSelect);
+	DeleteListCourse(pCourse);
+	/*Kiểm tra hàm hoạt động như thế nào*/
+}
+
+/*Hàm chép nội dung từ Course A sang Course B*/
+void CopyCourse(Course* CourseA, Course* CourseB)
+{
+	CourseB->ID = CourseA->ID;
+	CourseB->Name = CourseA->Name;
+	CourseB->Lecturer = CourseA->Lecturer;
+	CourseB->Credits = CourseA->Credits;
+	CourseB->StudentLimit = CourseA->StudentLimit;
+	CourseB->Weekday = CourseA->Weekday;
+	CourseB->SessionDay1 = CourseA->SessionDay1;
+	CourseB->SessionDay2 = CourseA->SessionDay2;
+	CourseB->Time1 = CourseA->Time1;
+	CourseA->Time2 = CourseA->Time2;
+}
+
+/*Hàm từ các course đăng ký, viết vào file registration*/
+void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Course* headCourse)
+{
+	string str = "";
+	/*Lấy đường dẫn ghi file registration*/
+	if (schoolyear == 1) {
+		if (semester == 1) str = "D:\\InputProject\\SchoolYear1\\Registration1.txt";
+		else if (semester == 2) str = "D:\\InputProject\\SchoolYear1\\Registration2.txt";
+		else str = "D:\\InputProject\\SchoolYear1\\Registration3.txt";
+	}
+	else
+		if (schoolyear == 2) {
+			if (semester == 1) str = "D:\\InputProject\\SchoolYear2\\Registration1.txt";
+			else if (semester == 2) str = "D:\\InputProject\\SchoolYear2\\Registration2.txt";
+			else str = "D:\\InputProject\\SchoolYear2\\Registration3.txt";
+		}
+		else {
+			if (semester == 1) str = "D:\\InputProject\\SchoolYear3\\Registration1.txt";
+			else if (semester == 2) str = "D:\\InputProject\\SchoolYear3\\Registration2.txt";
+			else str = "D:\\InputProject\\SchoolYear3\\Registration3.txt";
+		}
+	ofstream FileOut;
+	/*Lúc đăng ký thì ghi tiếp nội dung đăng ký, vì có nhiều sinh viên*/
+	FileOut.open(str);
+	/*Đưa con trỏ file đến cuối file*/
+	FileOut.seekp(0, ios::end);
+	/*Viết file thôi nào*/
+	if (FileOut.is_open() == false) cout << "File Registration can not be opened!" << endl;
+	else {
+		FileOut << headStudent->ID << ",";
+		Course* ptemp = headCourse;
+		while (ptemp->next != nullptr) {
+			FileOut << ptemp->ID << ",";
+			ptemp = ptemp->next;
+		}
+		FileOut << ptemp->ID;
+	}
+
+	FileOut.close();
+}
+
+/*Sau khi log out, sinh viên có nhu cầu log in và thay đổi đăng ký học phần hoặc xóa 1 số học phần*/
+/*Hàm để sinh viên thay đổi, update lựa chọn.*/
+void UpdateCourseSelection(int schoolyear, int semester, Student* headStudent)
+{
+	/*Hiển thị ra danh sách các course của staff nhập*/
+	wcout << L"List courses in this semester.";
+	Course* headCourse = nullptr;
+	ViewListCourse(schoolyear, semester, headCourse);
+	/*Hiển thị danh sách các course sinh viên đã đăng ký. Hàm của Oanh. Xem và chỉnh sửa lại.*/
+	wcout << L"Here your selected courses:" << endl;
+
+	/*Thay đổi lại dòng đã viết trong file Registration.txt.*/
+	 /*Xác định lại khóa học mới được update. Chuyển thành chuỗi string mới và Course ID mới. string.*/
+	wcout << L"Please select your course again.";
+	Course* CourseSelect = nullptr;
+	/*Trong đó CourseSelect là linked list danh sách Course sinh viên đã chọn*/
+	SelectCourse(headCourse, CourseSelect);
+
+	/*Đọc string ra từ file. Và sửa lại. Xong rồi viết lại tất cả.*/
+   /*1.Biến Course ID và MSSV thành chuỗi string.*/
+	string strtemp = "";
+	strtemp += to_string(headStudent->ID) + ',';
+	Course* pCur = CourseSelect;
+	while (pCur->next != nullptr) {
+		strtemp += to_string(pCur->ID) + ',';
+		pCur = pCur->next;
+	}
+	strtemp += to_string(pCur->ID);
+
+	/*2.Lần lượt đọc ra và ghi lại vào trong file. Nếu gặp file mà có MSSV đầu thì thay thế.*/
+	ifstream FileIn;
+	ofstream FileOut;
+
+	string str;/*string để đọc ra  từng chuỗi*/
+	string strID = "";/*Để lấy MSSV của mỗi string*/
+
+	if (FileIn.is_open() == false || FileOut.is_open() == false) wcout << L"File registration can not be opened." << endl; else
+	{
+		while (FileIn >> str) {
+			for (int i = 0;str[i] != ',';i++) strID += str[i];
+			if (strID == to_string(headStudent->ID)) str = strtemp;
+			FileOut << str << endl;
+		}
+	}
+
+	FileIn.close();
+	FileOut.close();
+
+
+	/*Xóa linked list Course*/
+	DeleteListCourse(CourseSelect);
+	DeleteListCourse(headCourse);
+}
+
+/*Hàm để sinh viên xóa 1 course.*/
+void DeleteACourseSelection(int schoolyear, int semester, Student* headStudent)
+{
+
+}
+
+/*Hàm nhận thông tin từ sinh viên nhập bàn phím khi đăng ký course.*/
+/*Trong đó pCourse là linked list danh sách khóa học staff nhập*/
+/*Trong đó CourseSelect là linked list danh sách do sinh viên đăng ký.*/
+void SelectCourse(Course* pCourse, Course*& CourseSelect)
+{
+	/*Nhận thông tin từ bàn phím sinh viên nhập*/
+	 /*Có một nút _getch() để cho option khi đăng kí*/
+	int button;
+	Course* CourseCur = nullptr, * CoursePos = nullptr;
+	Course* ptemp = nullptr;
+	Course* CurCheck = nullptr; /*Dùng để kiểm tra có trùng thời gian hay không*/
+	int pos = 0; /*Thứ tự course.*/
+	int max = 0;
+	while (max <= 5) {
+		max++; /*Kiểm tra số lượng course đăng ký*/
+		wcout << L"Choose course number:";
+		wcin >> pos;
+		CoursePos = pCourse;
+		if (pos != 1) for (int i = 2;i < pos - 1;i++) CoursePos = CoursePos->next;
+		/*Xác định course cần phải select*/ ptemp = CoursePos->next;
+		if (CourseSelect == nullptr)
+		{
+			CourseSelect = new Course;
+			CopyCourse(ptemp, CourseSelect);
+			CourseSelect->next = nullptr;
+			CourseCur = CourseSelect;
+		}
+		else {
+			/*Kiểm tra thời gian có bị trùng hay không đã*/
+			CurCheck = CourseSelect;
+			while (CurCheck != nullptr && CurCheck->SessionDay1 != ptemp->SessionDay1 && CurCheck->Time1 != ptemp->Time1 && CurCheck->SessionDay2 != ptemp->SessionDay2 && CurCheck->Time2 != ptemp->Time2)
+				CurCheck = CurCheck->next;
+			if (CurCheck == nullptr) {
+				CourseCur->next = new Course;
+				CourseCur = CourseCur->next;
+				CopyCourse(ptemp, CourseCur);
+				CourseCur->next = nullptr;
+			}
+			else wcout << "This course can not be selected." << endl;
+		}
+
+
+
+		wcout << L"Successfully!" << endl;
+		/*Cần phải xác định lại update và xóa.*/
+		wcout << L"Option: 1. Select next  2. Select again  3. Done registration"; /*Biến nhận option*/
+		button = _getch();
+		/* 1.49(ASCII) 2.50(ASCII) 3.51(ASCII) */
+		while (button != 49 && button != 50 && button != 51) button = _getch();
+		if (button == 49) continue;
+		if (button == 50)/*Chọn lại*/
+		{
+			/*Trường hợp chọn lại course đầu*/
+			if (CourseCur == CourseSelect) { delete CourseSelect; CourseSelect = nullptr; }
+			/*Trường hợp chọn lại course sau*/
+			else {
+				ptemp = CourseSelect;
+				while (ptemp->next != CourseCur) ptemp = ptemp->next;
+				delete CourseCur;
+				ptemp->next = nullptr;
+				CourseCur = ptemp;
+			}
+		}
+		if (button == 51) break;
+		/*Kiểm tra thời gian các course*/
+	}
+	/*Kiểm tra điều kiện, nếu 2 khóa học trùng thời gian học thì không được chọn*/ /*Tìm hiểu hàm thời gian*/
+}
+
+/*Những hàm cần thiết để xem các khóa học đã đăng kí*/
+void getData(string str, MaSo*& pHead);
+void readFile(string path1, wstring& str, Course* pHead);
+void DeleteListMaSo(MaSo*& pHead);
+void PrintOutEnrolledCourses(int schoolyear, int semester, MaSo* headMaSo);
+void viewEnrolledCourses(int schoolyear, int semester, int tempInput);
+
 int wmain()
 {
 
@@ -39,24 +270,24 @@ int wmain()
 	/*Nếu log out thì màn hình vẫn màu đen console thôi chứ không có trở về lại return 0*/
 
 	/*Xác định là staff hay là student.*/
-	wcout << "Are you Staff or Student: (1)Staff or (2)Student" << endl;
+	MenuBackGround();
+	wcout << ">>> Select your role:"<<endl<<"1.Staff"<<endl<<"2.Student" << endl;
 	button = _getch();
-	system("cls");
 	/*ASCII code: 1: 49, 2: 50*/
-
 	while (button != 49 && button != 50) button = _getch();
-
+	system("cls");
 
 
 
 	/******Công việc của staff nè!******/
 	if (button == 49) {
-		wcout << L"You are staff!!" << endl;
+		MenuBackGround();
+		wcout << L">>> STAFF <<<" << endl<<endl;
 		Staff s;
 
 		/*Staff log izn hoặc sign up vào hệ thống*/
 		int option = 0;
-		wcout << L"Do you want: (1) Log in to system! or (2) Sign up an account!" << endl;
+		wcout << L"Select your option: "<<endl<<L"1. Log in to system!" <<endl<<"2. Sign up an account!" << endl;
 		/*Dùng option để làm nút chọn luôn.*/
 		option = _getch();
 		
@@ -65,16 +296,22 @@ int wmain()
 		system("cls");
 
 		/*Nếu là log in hệ thống*/
-		bool check = false;/*Kiểm tra log in hệ thống có được chưa*/
-		string user, password;
-		while (option == 49 && check != true) {
-			wcout << L"Username: "; getline(cin, user);
-			wcout << L"Password: "; getline(cin, password);
-			loginStaff(path, user, password, check);
+		if (option == 49) {
+			MenuBackGround();
+			bool check = false;/*Kiểm tra log in hệ thống có được chưa*/
+			string user, password;
+			wcout << L">>> STAFF <<<" << endl << endl;
+			while (option == 49 && check != true) {
+				wcout << L">>> Username: "; getline(cin, user);
+				wcout << L">>> Password: "; getline(cin, password);
+				loginStaff(path, user, password, check);
+				system("cls");
+			}
 		}
 		/*Test*/
 		/*Nếu là tạo tài khoản trong hệ thống*/
 		if (option == 50) {
+			MenuBackGround();
 			signUpStaff(s);
 			SaveStaffAccount(path, s);
 		}
@@ -85,6 +322,7 @@ int wmain()
 
 	/*Nhận file csv. Đọc và tạo ra các file csv tương ứng là từng loại lớp APCS,CLC,CNTT,... trong file schoolyear1*/
 	/*Nhập thời gian học kì 1, học kì 2, học kì 3. Chỉ nhập một lần đầu tiên.*/
+	MenuBackGround();
 	if (StartSes1.tm_year == 0 || StartSes2.tm_year == 0 || StartSes3.tm_year == 0 || EndSes1.tm_year == 0 || EndSes2.tm_year == 0 || EndSes3.tm_year == 0)
 		SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
 	/*Xác định thời gian hiện tại*/
@@ -100,14 +338,18 @@ int wmain()
 	system("cls");
 
 	/*Xác định năm học :<<*/
-	 SchoolYearMenu( schoolyear);
+	MenuBackGround();
+	SchoolYearMenu(schoolyear);
 
 	/*Show ra cái menu*/
-	wcout << L"Options for schoolyear "<<schoolyear<<"."<<endl;
+	MenuBackGround();
+	
+	wcout << L"* Options for schoolyear "<<schoolyear<<". *"<<endl;
 	wcout << L"1.View classes" << endl;
 	wcout << L"2.Create/Add courses" << endl;
 	wcout << L"3.View courses" << endl;
-	wcout << L"4.Back" << endl;
+	wcout << L"4.Back" << endl<<endl;
+	wcout << L">>> Select your option: ";
 	int option;
 	option = _getch();
 	while (option != 49 && option != 50 && option != 51 && option != 52) option = _getch();
@@ -116,7 +358,7 @@ int wmain()
 	/*Khi tạo course thì mặc định là course vừa tạo. Giáo vụ log in, log out thì vẫn là học kì đó. Có thể có hàm switch để chuyển qua lại giữa các học kì*/
 	/*Thêm thời hạn (ngày bắt đầu/ngày kết thúc) đăng kí khóa học cho sinh viên*/
 	/*View danh sách các lớp*/
-	wcout << L"List of classes in schoolyear (Esc to back) " << schoolyear<<endl;
+	wcout << L"List of classes in schoolyear " << schoolyear<<L"(Esc to back)"<<endl;
 	wcout << L"1.APCS" << endl;
 	wcout << L"2.CLC" << endl;
 	wcout << L"3.CNTT" << endl;
@@ -125,6 +367,7 @@ int wmain()
 	option = _getch();
 	while (option != 49 && option != 50 && option != 51 && option != 52 && option != 53) option = _getch();
 	option = option - 48;
+	
 	Class* headClass = nullptr;
 	Student* headStudent = nullptr;
 
@@ -142,7 +385,7 @@ int wmain()
 	ViewListCourse(schoolyear, semester, headCourse);
 	/*View danh sách học sinh trong một course*/
 	int courseID;
-	cout << "Please input course ID: "; cin >> courseID;
+	cout << "Please input course ID: "; wcin >> courseID;
 	ViewStudentInCourse(schoolyear, courseID);
 	/*Thao tác thêm khóa học*/
 	/*Setup để đọc chữ tiếng việt*/
@@ -215,7 +458,7 @@ int wmain()
 	/*Xóa khóa học nè*/
 	DeleteACourseSelection(schoolyear, semester, headStudent);
 	/*Xem danh sách khóa học đăng kí nè.*/
-	int tempInput;
+	int tempInput=0;
 	viewEnrolledCourses(schoolyear, semester, tempInput);
 	/*Sau khi thời hạn đăng kí kết thúc thì có thể xem danh sách các khóa học đã đăng kí*/
 	/*Cuối kỳ thì xem kết quả học phần của mình nè.*/
