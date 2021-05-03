@@ -17,5 +17,5 @@ void SchoolYearMenu(int& schoolyear)
 
 void MenuBackGround()
 {
-	cout << "******Course Registration System*******" << endl << endl;
+	wcout << "******Course Registration System*******" << endl << endl;
 }

@@ -1,5 +1,6 @@
 ﻿#include"StructStudent.h"
 #include"Student.h"
+#include"Staff.h"
 #include<iostream>
 #include<fstream>
 #include<string>
@@ -9,7 +10,6 @@
 #include<codecvt>
 using namespace std;
 
-void loginStudent(Student* pHead, string username, string pass);
 
 
 /*void login(Student* pHead) {
@@ -31,18 +31,116 @@ void loginStudent(Student* pHead, string username, string pass);
 }
 */
 
-/*Thử hàm log in này xem*/
-void loginStudent(Student* pHead, string username, string pass) {
+/*Kiểm tra log in sinh viên có được không*/
+bool checkLogin(string username, string pass) {
+	Student* headStudent = nullptr;
+	wstring str;
+	string path="";
 
+	/*Schoolyear 1*/
+	path = "D:\\InputProject\\SchoolYear1\\APCS.csv";
+	Input(path,str,headStudent);
+	if (loginStudent(headStudent, username, pass)==true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear1\\CLC.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear1\\CNTN.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear1\\VP.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear1\\CTDT.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+
+	/*Schoolyear 2*/
+	path = "D:\\InputProject\\SchoolYear2\\APCS.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear2\\CLC.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear2\\CNTN.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear2\\VP.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear2\\CTDT.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+
+
+	/*Schoolyear 3*/
+	path = "D:\\InputProject\\SchoolYear3\\APCS.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear3\\CLC.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear3\\CNTN.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear3\\VP.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear3\\CTDT.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+
+
+	/*Schoolyear 4*/
+	path = "D:\\InputProject\\SchoolYear4\\APCS.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear4\\CLC.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear4\\CNTN.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear4\\VP.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+	path = "D:\\InputProject\\SchoolYear4\\CTDT.csv";
+	Input(path, str, headStudent);
+	if (loginStudent(headStudent, username, pass) == true) return true;
+	DeleteListStudent(headStudent);
+
+	return false;
+}
+
+/*Thử hàm log in này xem*/
+bool loginStudent(Student* pHead, string username, string pass) {
+	
 	Student* pCur = pHead;
 	while (pCur != nullptr && pCur->username != username) pCur = pCur->pNext;
 	if (pCur != nullptr)
 	{
-		if (pCur->password != pass) cout << "Wrong password!";
-		else cout << "Logging In successfully";
+		if (pCur->password != pass) return false;
+		else return true;
 	}
-	else
-		cout << "Invalid login, please try again !" << endl;
+	return false;
 }
 
 /*Hàm kiểm tra xem staff login có đúng hay không!! từ đường dẫn path */

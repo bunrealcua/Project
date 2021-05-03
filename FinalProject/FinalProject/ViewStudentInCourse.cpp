@@ -24,9 +24,10 @@ void ViewStudentInCourse(int schoolyear, int courseID)
 	FileIn.open(str);
 	string temp;
 	MaSo* headMaSo = nullptr, * curMaSo = nullptr;
-	if (FileIn.is_open() == false) cout << "File registration can not be opened" << endl;
+	if (FileIn.is_open() == false) wcout << "File registration can not be opened" << endl;
 	else {
 		getline(FileIn, temp);
+		if (temp=="") wcout<< "There is no student in this course" << endl;
 		while (!FileIn.eof() && temp != "")
 		{
 			getData(temp, headMaSo);
@@ -39,7 +40,7 @@ void ViewStudentInCourse(int schoolyear, int courseID)
 			getline(FileIn, temp);
 		}
 	}
-
+	
 	DeleteListMaSo(headMaSo);
 	FileIn.close();
 }

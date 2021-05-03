@@ -33,7 +33,10 @@ void getData(string str, MaSo*& pHead);/*Hàm đọc chuỗi đăng kí gồm MS
 void ViewStudentInCourse(int schoolyear, int courseID);/*Ham xem danh sach hoc sinh trong khoa hoc*/
 void DeleteListMaSo(MaSo*& pHead);
 void SeekInfoStudent(int schoolyear, int IDstudent);
-void loginStudent(Student* pHead, string username, string pass);
+
+/*Đăng nhập của sinh viên*/
+bool loginStudent(Student* pHead, string username, string pass);
+bool checkLogin(string username, string pass);
 
 #endif
 
