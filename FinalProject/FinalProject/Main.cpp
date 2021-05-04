@@ -250,8 +250,10 @@ void viewEnrolledCourses(int schoolyear, int semester, int tempInput);
 
 int wmain()
 {
-
-
+	SetConsoleTitle(L"HCMUS - Course Registration System");
+	/*_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);*/
+	wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
 	string path = "D:\\InputProject\\StaffAccount.txt";
 	int button = 0;
 	/*****Danh sách các biến cần sử dụng trong chương trình ******/
@@ -263,6 +265,10 @@ int wmain()
 	tm TimeCur;
 	/*Biến học kì và năm học*/
 	int semester = 0, schoolyear = 0;
+	/*Biến linked list các kiểu*/
+	Class* headClass = nullptr;
+	Student* headStudent = nullptr;
+	Course* headCourse = nullptr;
 
 	/*******Đăng nhập để biết*******/
 	/*Làm sao log in, log out được nhỉ, đối với giáo viên, à nếu log out thì log out thôi. Có thể hàm tạo tài khoản cho staff*/
@@ -271,7 +277,7 @@ int wmain()
 
 	/*Xác định là staff hay là student.*/
 	MenuBackGround();
-	wcout << ">>> Select your role:"<<endl<<"1.Staff"<<endl<<"2.Student" << endl;
+	wcout << ">>> Select your role:" << endl << "1.Staff" << endl << "2.Student" << endl;
 	button = _getch();
 	/*ASCII code: 1: 49, 2: 50*/
 	while (button != 49 && button != 50) button = _getch();
@@ -282,28 +288,33 @@ int wmain()
 	/******Công việc của staff nè!******/
 	if (button == 49) {
 		MenuBackGround();
-		wcout << L">>> STAFF <<<" << endl<<endl;
+		wcout << L">>> STAFF <<<" << endl << endl;
 		Staff s;
 
 		/*Staff log izn hoặc sign up vào hệ thống*/
 		int option = 0;
-		wcout << L"Select your option: "<<endl<<L"1. Log in to system!" <<endl<<"2. Sign up an account!" << endl;
+		wcout << L"Select your option: " << endl << L"1. Log in to system!" << endl << "2. Sign up an account!" << endl;
 		/*Dùng option để làm nút chọn luôn.*/
 		option = _getch();
-		
+
 		/*ASCII code: 1: 49, 2: 50*/
 		while (option != 49 && option != 50) option = _getch();
 		system("cls");
 
 		/*Nếu là log in hệ thống*/
 		if (option == 49) {
-			MenuBackGround();
+
 			bool check = false;/*Kiểm tra log in hệ thống có được chưa*/
+			wstring tempuser, temppassword;
 			string user, password;
-			wcout << L">>> STAFF <<<" << endl << endl;
+
 			while (option == 49 && check != true) {
-				wcout << L">>> Username: "; getline(cin, user);
-				wcout << L">>> Password: "; getline(cin, password);
+				MenuBackGround();
+				wcout << L">>> STAFF <<<" << endl << endl;
+				wcout << L">>> Username: "; getline(wcin, tempuser);
+				wcout << L">>> Password: "; getline(wcin, temppassword);
+				user = convert.to_bytes(tempuser);
+				password = convert.to_bytes(temppassword);
 				loginStaff(path, user, password, check);
 				system("cls");
 			}
@@ -318,154 +329,211 @@ int wmain()
 		/*Task Tạo năm học mới*/
 
 
-	}
+
 
 	/*Nhận file csv. Đọc và tạo ra các file csv tương ứng là từng loại lớp APCS,CLC,CNTT,... trong file schoolyear1*/
 	/*Nhập thời gian học kì 1, học kì 2, học kì 3. Chỉ nhập một lần đầu tiên.*/
-	MenuBackGround();
-	if (StartSes1.tm_year == 0 || StartSes2.tm_year == 0 || StartSes3.tm_year == 0 || EndSes1.tm_year == 0 || EndSes2.tm_year == 0 || EndSes3.tm_year == 0)
-		SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
-	/*Xác định thời gian hiện tại*/
-	/*Xác định học kì và năm học*/
-	/*Cập nhật lại học kì nếu thời gian quá năm học*/
-	time_t now = time(0);
-	localtime_s(&TimeCur, &now);
-	TimeCur.tm_mon++;
-	while (isOutOfDate(TimeCur, StartSes1, EndSes3) == false) SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
-	if (TimeCur.tm_mon >= StartSes3.tm_mon) semester = 3;
-	else if (TimeCur.tm_mon >= StartSes2.tm_mon) semester = 2;
-	else semester = 1;
-	system("cls");
+		MenuBackGround();
+		if (StartSes1.tm_year == 0 || StartSes2.tm_year == 0 || StartSes3.tm_year == 0 || EndSes1.tm_year == 0 || EndSes2.tm_year == 0 || EndSes3.tm_year == 0)
+			SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
+		/*Xác định thời gian hiện tại*/
+		/*Xác định học kì và năm học*/
+		/*Cập nhật lại học kì nếu thời gian quá năm học*/
+		time_t now = time(0);
+		localtime_s(&TimeCur, &now);
+		TimeCur.tm_mon++;
+		while (isOutOfDate(TimeCur, StartSes1, EndSes3) == false) SetUpTimeSes(StartSes1, EndSes1, StartSes2, EndSes2, StartSes3, EndSes3);
+		if (TimeCur.tm_mon >= StartSes3.tm_mon) semester = 3;
+		else if (TimeCur.tm_mon >= StartSes2.tm_mon) semester = 2;
+		else semester = 1;
+		system("cls");
 
-	/*Xác định năm học :<<*/
-	MenuBackGround();
-	SchoolYearMenu(schoolyear);
+		/*Xác định năm học :<<*/
+		MenuBackGround();
+		SchoolYearMenu(schoolyear);
 
-	/*Show ra cái menu*/
-	MenuBackGround();
+		/*Show ra cái menu*/
+		MenuBackGround();
+
+		wcout << L"* Options for schoolyear " << schoolyear << ". *" << endl;
+		wcout << L"1.View classes" << endl;
+		wcout << L"2.Create/Add courses" << endl;
+		wcout << L"3.View courses" << endl;
+		wcout << L"4.View student in a course" << endl;
+		wcout << L"5.Back" << endl;
+		wcout << L"6.Logging out" << endl << endl;
+		wcout << L">>> Select your option: ";
+
+		option = _getch();
+
+		while (option != 49 && option != 50 && option != 51 && option != 52 && option != 53) option = _getch();
+		if (option == 53) SchoolYearMenu(schoolyear);
+
 	
-	wcout << L"* Options for schoolyear "<<schoolyear<<". *"<<endl;
-	wcout << L"1.View classes" << endl;
-	wcout << L"2.Create/Add courses" << endl;
-	wcout << L"3.View courses" << endl;
-	wcout << L"4.Back" << endl<<endl;
-	wcout << L">>> Select your option: ";
-	int option;
-	option = _getch();
-	while (option != 49 && option != 50 && option != 51 && option != 52) option = _getch();
-	if (option == 52) SchoolYearMenu(schoolyear);
+		/*Khi tạo course thì mặc định là course vừa tạo. Giáo vụ log in, log out thì vẫn là học kì đó. Có thể có hàm switch để chuyển qua lại giữa các học kì*/
+		/*Thêm thời hạn (ngày bắt đầu/ngày kết thúc) đăng kí khóa học cho sinh viên*/
+		/*View danh sách các lớp*/
+		if (option == 49)
+		{
+			wcout << L"List of classes in schoolyear " << schoolyear << L"(Esc to back)" << endl;
+			wcout << L"1.APCS" << endl;
+			wcout << L"2.CLC" << endl;
+			wcout << L"3.CNTT" << endl;
+			wcout << L"4.CTDT" << endl;
+			wcout << L"5.VP" << endl;
+			option = _getch();
+			while (option != 49 && option != 50 && option != 51 && option != 52 && option != 53) option = _getch();
+			option = option - 48;
 
-	/*Khi tạo course thì mặc định là course vừa tạo. Giáo vụ log in, log out thì vẫn là học kì đó. Có thể có hàm switch để chuyển qua lại giữa các học kì*/
-	/*Thêm thời hạn (ngày bắt đầu/ngày kết thúc) đăng kí khóa học cho sinh viên*/
-	/*View danh sách các lớp*/
-	wcout << L"List of classes in schoolyear " << schoolyear<<L"(Esc to back)"<<endl;
-	wcout << L"1.APCS" << endl;
-	wcout << L"2.CLC" << endl;
-	wcout << L"3.CNTT" << endl;
-	wcout << L"4.CTDT" << endl;
-	wcout << L"5.VP" << endl;
-	option = _getch();
-	while (option != 49 && option != 50 && option != 51 && option != 52 && option != 53) option = _getch();
-	option = option - 48;
-	
-	Class* headClass = nullptr;
-	Student* headStudent = nullptr;
-
-	ViewClass(option, schoolyear,headStudent,headClass);
+			ViewClass(option, schoolyear, headStudent, headClass);
 
 
-	/*View danh sách học sinh trong một lớp*/
-	string data;
-	wcout << "View list of student in class: ";
-	getline(cin, data);
-	cout << endl;
-	viewStudent_InClass(data, headStudent);
-	/*View danh sách khóa học*/
-	Course* headCourse = nullptr;
-	ViewListCourse(schoolyear, semester, headCourse);
-	/*View danh sách học sinh trong một course*/
-	int courseID;
-	cout << "Please input course ID: "; wcin >> courseID;
-	ViewStudentInCourse(schoolyear, courseID);
-	/*Thao tác thêm khóa học*/
-	/*Setup để đọc chữ tiếng việt*/
-	_setmode(_fileno(stdin), _O_U16TEXT);
-	_setmode(_fileno(stdout), _O_U16TEXT);
-	wcout << L"Semester "<<semester<<L" is coming. Input course in semester "<<semester<<"." << endl;
-	
-	short tempI;
-	wstring wtemp = L"", wstr = L"";
+			/*View danh sách học sinh trong một lớp*/
+			string data;
+			wcout << "View list of student in class: ";
+			getline(cin, data);
+			cout << endl;
 
-	// Nhập các course.
-	CourseInfo* pHead = nullptr, * pCur = nullptr;
-	do {
-		wstr = L"";
-		wcout << L"Course ID: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L',';
-		wcout << L"Course name: "; wcin.ignore(); getline(wcin, wtemp);
-		wstr += wtemp + L",";
-		wcout << L"Lecturer: "; fflush(stdin); getline(wcin, wtemp);
-		wstr += wtemp + L",";
-		wcout << L"Number of credits: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L",";
-		wcout << L"Student limit: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L",";
-		wcout << L"Week day: "; wcin >> tempI;
-		wstr += to_wstring(tempI) + L",";
-		wcout << L"Session Day 1 (Mon/Tue/Wed/Thu/Fri/Sat/Sun) : "; getline(wcin,wtemp);
-		wstr += wtemp+L","; 
-		wcout << L"Time day 1 (hh:mm-hh:mm)"; getline(wcin, wtemp);
-		wstr += wtemp + L",";
-		wcout << L"Session Day 1 (Mon/Tue/Wed/Thu/Fri/Sat/Sun) : "; getline(wcin, wtemp);
-		wstr += wtemp + L",";
-		wcout << L"Time day 2 (hh:mm-hh:mm)"; getline(wcin, wtemp);
-		wstr += wtemp;
-		if (pHead == nullptr) {
-			pHead = new CourseInfo;
-			pHead->info = wstr;
-			pHead->next = nullptr;
-			pCur = pHead;
+			viewStudent_InClass(data, headStudent);
+			DeleteListStudent(headStudent);
 		}
-		else {
-			pCur->next = new CourseInfo;
-			pCur = pCur->next;
-			pCur->info = wstr;
-			pCur->next = nullptr;
+		/*View danh sách khóa học*/
+		if (option == 51) {
+			ViewListCourse(schoolyear, semester, headCourse);
+			DeleteListCourse(headCourse);
 		}
-		wcout << endl;
-		wcout << L"Add a new course.?? 1: Yes or 0: No" << endl;
-		tempI = _getch();
+		/*View danh sách học sinh trong một course*/
+		if (option == 52) {
+			ViewListCourse(schoolyear, semester, headCourse);
+			int courseID;
+			wcout << L"Please input course ID: "; wcin >> courseID;
+			ViewStudentInCourse(schoolyear, courseID);
+			DeleteListCourse(headCourse);
+		}
+		if (option == 50) {
+			/*Thao tác thêm khóa học*/
+			/*Setup để đọc chữ tiếng việt*/
+			_setmode(_fileno(stdin), _O_U16TEXT);
+			_setmode(_fileno(stdout), _O_U16TEXT);
+			system("cls");
+			MenuBackGround();
+			wcout << L">>> Semester " << semester << L" is coming. Input course in semester " << semester << "." << endl;
 
-	} while (tempI == 49);
-	SetUpSemester(schoolyear, semester, pHead);
-	DeleteListCourseInfo(pHead);
-	wcout << L"Do you want to view the list of courses.";
-	/*Xóa, update thông tin khóa học đó.*/
+			short tempI;
+			wstring wtemp = L"", wstr = L"";
 
-	/*Cuối kì chưa làm được*/
-	DeleteListCourse(headCourse);
-	DeleteListStudent(headStudent);
+			// Nhập các course.
+			CourseInfo* pHead = nullptr, * pCur = nullptr;
+			do {
+				wstr = L"";
+				wcout << L"Course ID: "; wcin >> tempI;
+				wstr += to_wstring(tempI) + L',';
+				wcout << L"Course name: "; wcin.ignore(); getline(wcin, wtemp);
+				wstr += wtemp + L",";
+				wcout << L"Lecturer: "; fflush(stdin); getline(wcin, wtemp);
+				wstr += wtemp + L",";
+				wcout << L"Number of credits: "; wcin >> tempI;
+				wstr += to_wstring(tempI) + L",";
+				wcout << L"Student limit: "; wcin >> tempI;
+				wstr += to_wstring(tempI) + L",";
+				wcout << L"Week day: "; wcin >> tempI;
+				wstr += to_wstring(tempI) + L",";
+				wcout << L"Session Day 1 (Mon/Tue/Wed/Thu/Fri/Sat/Sun) : "; getline(wcin, wtemp);
+				wstr += wtemp + L",";
+				wcout << L"Time day 1 (hh:mm-hh:mm)"; getline(wcin, wtemp);
+				wstr += wtemp + L",";
+				wcout << L"Session Day 1 (Mon/Tue/Wed/Thu/Fri/Sat/Sun) : "; getline(wcin, wtemp);
+				wstr += wtemp + L",";
+				wcout << L"Time day 2 (hh:mm-hh:mm)"; getline(wcin, wtemp);
+				wstr += wtemp;
+				if (pHead == nullptr) {
+					pHead = new CourseInfo;
+					pHead->info = wstr;
+					pHead->next = nullptr;
+					pCur = pHead;
+				}
+				else {
+					pCur->next = new CourseInfo;
+					pCur = pCur->next;
+					pCur->info = wstr;
+					pCur->next = nullptr;
+				}
+				wcout << endl;
+				wcout << L"Add a new course.?? 1: Yes or 0: No" << endl;
+				tempI = _getch();
 
+			} while (tempI == 49);
+			SetUpSemester(schoolyear, semester, pHead);
+			DeleteListCourseInfo(pHead);
+			/*Xóa, update thông tin khóa học đó.*/
+		}
+
+
+		/*Cuối kì chưa làm được*/
+		DeleteListCourse(headCourse);
+		DeleteListStudent(headStudent);
+	}
 
 	/******Công việc của sinh viên*****/
-	if (button == 50) wcout << L"You are student!!" << endl;
+	if (button == 50) {
+		int option;
+		wstring tempusername, temppassword;
+		string username, password;
+		MenuBackGround();
+		wcout << L"* You are student!! *" << endl<<endl;
+		wcout << L">>> Username: "; getline(wcin, tempusername);
+		wcout << L">>> Password: "; getline(wcin, temppassword);
+		username = convert.to_bytes(tempusername);
+		password = convert.to_bytes(temppassword);
+		while (checkLogin(username, password) != true)
+		{
+			wcout << L"Your logging is invalid. Please check your Username or Password"<<endl<<endl;
+			wcout << L">>> Username: "; getline(wcin, tempusername);
+			wcout << L">>> Password: "; getline(wcin, temppassword);
+			username = convert.to_bytes(tempusername);
+			password = convert.to_bytes(temppassword);
+		}
+		wcout << L"Logging in successfully!"<<endl;
+		option = _getch();
+		
+		headStudent = nullptr;
+		Student* curStudent = nullptr;
+		curStudent = defineStudent(headStudent, username, password);
+		DeleteListStudent(headStudent);
 
-	/*Hàm đăng nhập của sinh viên*/ /*Tạo file riêng để dễ dàng đăng nhập hơn*/
-	/*Hàm nhập thời gian sẽ hoạt động mỗi lần sinh viên log in để kiểm tra đã quá thời hạn đănng kí chưa*/
-	/*Đăng kí khóa học nè.*/
-	Course* CourseSelect = nullptr;
-	SelectCourse(headCourse, CourseSelect);
-	/*Xóa khóa học nè*/
-	DeleteACourseSelection(schoolyear, semester, headStudent);
-	/*Xem danh sách khóa học đăng kí nè.*/
-	int tempInput=0;
-	viewEnrolledCourses(schoolyear, semester, tempInput);
-	/*Sau khi thời hạn đăng kí kết thúc thì có thể xem danh sách các khóa học đã đăng kí*/
-	/*Cuối kỳ thì xem kết quả học phần của mình nè.*/
+		system("cls");
+		MenuBackGround();
+		wcout << L"1.Register courses"<<endl;
+		wcout<<	 L"2.View courses registered"<<endl;
+		wcout << L"3.View scoreboard." << endl;
+		wcout << L"4.View profile" << endl;
+		wcout << L"5.Logging out." << endl<<endl;
 
-	/*Tạm thời nếu làm xong chừng này thì ổn vailoz*/
+		wcout << L">>> Select your option: ";
+		option = _getch();
+		while (option != 49 && option != 50 && option != 51 && option != 52 && option != 53) option = _getch();
+		/*Hàm đăng nhập của sinh viên*/ /*Tạo file riêng để dễ dàng đăng nhập hơn*/
+		/*Hàm nhập thời gian sẽ hoạt động mỗi lần sinh viên log in để kiểm tra đã quá thời hạn đănng kí chưa*/
+		/*Đăng kí khóa học nè.*/
+		if (option == 49) {
+			Course* CourseSelect = nullptr;
+			SelectCourse(headCourse, CourseSelect);
+		}
+		/*Xóa khóa học nè*/
+		DeleteACourseSelection(schoolyear, semester, headStudent);
+		/*Xem danh sách khóa học đăng kí nè.*/
+		if (option == 50) {
+			int tempInput = 0;
+			viewEnrolledCourses(schoolyear, semester, tempInput);
+		}
+		if (option == 51) wcout << L"View scoreboard" << endl;
+		if (option == 52) wcout << L"View profile" << endl;
+		/*Sau khi thời hạn đăng kí kết thúc thì có thể xem danh sách các khóa học đã đăng kí*/
+		/*Cuối kỳ thì xem kết quả học phần của mình nè.*/
 
+		/*Tạm thời nếu làm xong chừng này thì ổn vailoz*/
 
+	}
 
 
 

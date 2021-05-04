@@ -10,7 +10,7 @@
 using namespace std;
 
 /*Hàm này để đọc từ file các chuỗi và chia nhỏ thành các thành phần của struct student*/
-void Input(string path, wstring& str, Student*& pHead)
+void Input(string path, wstring& wstr, Student*& pHead)
 {
 	wifstream FileIn;
 	FileIn.open(path);
@@ -18,25 +18,25 @@ void Input(string path, wstring& str, Student*& pHead)
 	_setmode(_fileno(stdin), _O_U16TEXT);
 	if (FileIn.is_open() == false) cout << "FileIn cannot be opened.";
 	FileIn.imbue(utf8_locale);
-	getline(FileIn, str);
+	getline(FileIn, wstr);
 	Student* pCur = nullptr;
-	getline(FileIn, str);
-	while (!FileIn.eof() && str != L"") {
+	getline(FileIn, wstr);
+	while (!FileIn.eof() && wstr != L"") {
 
 		if (pHead == nullptr)
 		{
 			pHead = new Student;
-			SetUp(str, pHead);
+			SetUp(wstr, pHead);
 			pHead->pNext = nullptr;
 			pCur = pHead;
 		}
 		else {
 			pCur->pNext = new Student;
 			pCur = pCur->pNext;
-			SetUp(str, pCur);
+			SetUp(wstr, pCur);
 			pCur->pNext = nullptr;
 		}
-		getline(FileIn, str);
+		getline(FileIn, wstr);
 	}
 	FileIn.close();
 }
@@ -178,4 +178,59 @@ void DisplayListStudent(Student* pHead)
 		wcout << pCur->SchoolYear << endl;
 		pCur = pCur->pNext;
 	}
+}
+
+Student* defineStudent(Student* &headStudent,string username, string password)
+{
+	Student *curStudent=nullptr;
+	wstring wstr=L"";
+
+	/*Schoolyear 1*/
+	string path = "D:\\InputProject\\SchoolYear1\\APCS.csv";
+	headStudent = nullptr;
+	Input(path, wstr, headStudent);
+	curStudent = headStudent;
+	while (curStudent != nullptr && curStudent->username != username)
+		curStudent = curStudent->pNext;
+	if (curStudent != nullptr)  return curStudent;  
+	DeleteListStudent(headStudent);
+	string path = "D:\\InputProject\\SchoolYear1\\CNTN.csv";
+	headStudent = nullptr;
+	Input(path, wstr, headStudent);
+	curStudent = headStudent;
+	while (curStudent != nullptr && curStudent->username != username)
+		curStudent = curStudent->pNext;
+	if (curStudent != nullptr)  return curStudent;
+	DeleteListStudent(headStudent);
+	
+	string path = "D:\\InputProject\\SchoolYear1\\CLC.csv";
+	headStudent = nullptr;
+	Input(path, wstr, headStudent);
+	curStudent = headStudent;
+	while (curStudent != nullptr && curStudent->username != username)
+		curStudent = curStudent->pNext;
+	if (curStudent != nullptr)  return curStudent;
+	DeleteListStudent(headStudent);
+
+	string path = "D:\\InputProject\\SchoolYear1\\CTDT.csv";
+	headStudent = nullptr;
+	Input(path, wstr, headStudent);
+	curStudent = headStudent;
+	while (curStudent != nullptr && curStudent->username != username)
+		curStudent = curStudent->pNext;
+	if (curStudent != nullptr)  return curStudent;
+	DeleteListStudent(headStudent);
+
+	string path = "D:\\InputProject\\SchoolYear1\\VP.csv";
+	headStudent = nullptr;
+	Input(path, wstr, headStudent);
+	curStudent = headStudent;
+	while (curStudent != nullptr && curStudent->username != username)
+		curStudent = curStudent->pNext;
+	if (curStudent != nullptr)  return curStudent;
+	DeleteListStudent(headStudent);
+
+	/*SChoolyear 2*/
+	/*Schoolyear 3*/
+	/*Schoolyear 4*/
 }

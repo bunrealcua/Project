@@ -8,6 +8,8 @@
 #include<locale>
 #include<codecvt>
 #include<conio.h>
+#include"Menu.h"
+#include<Windows.h>
 using namespace std;
 
 /*Hàm có tác dụng ghi danh sách các khóa học nhập từ bàn phím vào file.*/
@@ -168,6 +170,7 @@ void ViewListCourse(int schoolyear, int semester, Course*& pHead)
 
 	/*Set up để đọc chữ cái Tiếng việt utf8*/
 	_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	locale loc(locale(), new codecvt_utf8<wchar_t>);
 	wifstream FileIn;
 	FileIn.imbue(loc);
@@ -199,18 +202,17 @@ void ViewListCourse(int schoolyear, int semester, Course*& pHead)
 		pCur = pHead;
 		/*Setup để chuyển đổi giữa string và wstring :))*/
 		wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
-		;
+		system("cls");
+		MenuBackGround();
+		wcout << L">>> Available courses for semester " << semester << L" (schoolyear " << schoolyear << ")" << endl;
+		wcout << L"ID | Name | Lecturer | Credits | Student limits | Weekday | Session 1 (Time 1) | Session2 (Time 2)"<<endl<<endl;
 		while (pCur != nullptr) {
-			wcout << pCur->ID << L" " << pCur->Name << L" ";
-			wcout << pCur->Lecturer << L" " << pCur->Credits << L" " << pCur->StudentLimit << L" " << pCur->Weekday << L" ";
-			wcout << convert.from_bytes(pCur->SessionDay1) << L" " << convert.from_bytes(pCur->Time1) << L" " << convert.from_bytes(pCur->SessionDay2)<<L" " << convert.from_bytes(pCur->Time2) << endl;
+			wcout << pCur->ID << L" | " << pCur->Name << L" | ";
+			wcout << pCur->Lecturer << L" | " << pCur->Credits << L" | " << pCur->StudentLimit << L" | " << pCur->Weekday << L" | ";
+			wcout << convert.from_bytes(pCur->SessionDay1) << L" (" << convert.from_bytes(pCur->Time1) << L") | " << convert.from_bytes(pCur->SessionDay2)<<L" (" << convert.from_bytes(pCur->Time2)<<L")" << endl;
 			pCur = pCur->next;
 		}
-		while (pHead != nullptr) {
-			pCur = pHead;
-			pHead = pHead->next;
-			delete pCur;
-		}
+
 	}/*Phải xóa linked list Course*/
 	DeleteListCourse(pHead);
 	FileIn.close();
