@@ -60,7 +60,7 @@ void EditStudent(Student* pHead,int schoolyear, int option) {
 			Student* pCur = pHead;
 			while (pCur != nullptr) {
 				if(pCur->ID==id){
-					cout << "1.Change ID\n" << "2.Change fisrt name\n" << "3.Change last name\n";
+					cout << "1.Change ID\n" << "2.Change fisrt name\n" << "3.Change last name\n"<<"4.Change gender\n"<<"5.Change dateOfBirth\n"<<"6.Change socialID\n";
 					int choose;
 					cin >> choose;
 					switch (choose) {
@@ -76,6 +76,18 @@ void EditStudent(Student* pHead,int schoolyear, int option) {
 						cout << "Enter your new last name " << endl;
 						wcin >> lastName;
 						pCur->Last_Name = lastName;
+					case 4:
+						cout << "Enter your new gender " << endl;
+						cin >> gender;
+						pCur->Gender = gender;
+					case 5:
+						cout << "Enter your new date of birth " << endl;
+						cin >> dateOfBirth;
+						pCur->DateOfBirth = dateOfBirth;
+					case 6:
+						cout << "Enter your new social ID " << endl;
+						cin >>socialID;
+						pCur->Social_ID = socialID;
 
 					}
 					pCur = pCur->pNext;
