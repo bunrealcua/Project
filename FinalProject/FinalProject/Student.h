@@ -37,6 +37,7 @@ void SeekInfoStudent(int schoolyear, int IDstudent);
 /*Đăng nhập của sinh viên*/
 bool loginStudent(Student* pHead, string username, string pass);
 bool checkLogin(string username, string pass);
-
+/*Define Student*/
+Student* defineStudent(Student*& headStudent, string username, string password);
 #endif
 

@@ -495,11 +495,16 @@ int wmain()
 		}
 		wcout << L"Logging in successfully!"<<endl;
 		option = _getch();
+		
+		headStudent = nullptr;
+		Student* curStudent = nullptr;
+		curStudent = defineStudent(headStudent, username, password);
+		DeleteListStudent(headStudent);
 
 		system("cls");
 		MenuBackGround();
 		wcout << L"1.Register courses"<<endl;
-		wcout<<L"2.View courses registered"<<endl;
+		wcout<<	 L"2.View courses registered"<<endl;
 		wcout << L"3.View scoreboard." << endl;
 		wcout << L"4.View profile" << endl;
 		wcout << L"5.Logging out." << endl<<endl;
