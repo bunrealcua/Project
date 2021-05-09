@@ -158,6 +158,7 @@
     <ClCompile Include="SetUpTimeSemester.cpp" />
     <ClCompile Include="SignUp.cpp" />
     <ClCompile Include="EditStudent.cpp" />
+    <ClCompile Include="ExportListOfStu.cpp" />
     <ClCompile Include="StaffCreationSemester.cpp" />
     <ClCompile Include="ViewClass.cpp" />
     <ClCompile Include="ViewEnrolledCourse.cpp" />
