@@ -31,6 +31,11 @@ void ExportListOfStu(Student* pHead)
 	while (!filein.eof()) {
 		while (pCur != nullptr) {
 			filein >> pCur->ID >> a >> pCur->First_Name >> a >> pCur->Last_Name >> a >> pCur->Gender >> a >> n >> a >> pCur->Social_ID >> a;
+			count++;
+			fileout << count << a << pCur->ID << a << pCur->First_Name << a << pCur->Last_Name << a << pCur->Gender << a << n << a << pCur->Social_ID << a << endl;
+			pCur = pCur->pNext;
 		}
 	}
+	filein.close();
+	fileout.close();
 }
