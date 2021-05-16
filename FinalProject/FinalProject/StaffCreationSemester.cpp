@@ -21,26 +21,26 @@ void SetUpSemester(int schoolyear, int semester, CourseInfo* pHead)
 	// Lấy đường dẫn đến file ghi danh sách khóa học
 	if (schoolyear == 1)
 	{
-		if (semester == 1) str = "D:\\InputProject\\SchoolYear1\\CourseSemester1.txt";
-		else if (semester == 2) str = "D:\\InputProject\\SchoolYear1\\CourseSemester2.txt";
-		else  str = "D:\\InputProject\\SchoolYear1\\CourseSemester3.txt";
+		if (semester == 1) str = "Data\\SchoolYear1\\CourseSemester1.txt";
+		else if (semester == 2) str = "Data\\SchoolYear1\\CourseSemester2.txt";
+		else  str = "Data\\SchoolYear1\\CourseSemester3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) str = "D:\\InputProject\\SchoolYear2\\CourseSemester1.txt";
-			else if (semester == 2) str = "D:\\InputProject\\SchoolYear2\\CourseSemester2.txt";
-			else str = "D:\\InputProject\\SchoolYear2\\CourseSemester3.txt";
+			if (semester == 1) str = "Data\\SchoolYear2\\CourseSemester1.txt";
+			else if (semester == 2) str = "Data\\SchoolYear2\\CourseSemester2.txt";
+			else str = "Data\\SchoolYear2\\CourseSemester3.txt";
 		}
 		else
 			if (schoolyear == 3) {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear3\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear3\\CourseSemester2.txt";
-				else  str = "D:\\InputProject\\SchoolYear3\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear3\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear3\\CourseSemester2.txt";
+				else  str = "Data\\SchoolYear3\\CourseSemester3.txt";
 			}
 			else {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear4\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear4\\CourseSemester2.txt";
-				else str = "D:\\InputProject\\SchoolYear4\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear4\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear4\\CourseSemester2.txt";
+				else str = "Data\\SchoolYear4\\CourseSemester3.txt";
 			}
 
 	/*Tạo thông tin khóa học trong một học kì*/
@@ -146,26 +146,26 @@ void ViewListCourse(int schoolyear, int semester, Course*& pHead)
 	/*Lấy đường dẫn để đọc file*/
 	if (schoolyear == 1)
 	{
-		if (semester == 1) str = "D:\\InputProject\\SchoolYear1\\CourseSemester1.txt";
-		else if (semester == 2) str = "D:\\InputProject\\SchoolYear1\\CourseSemester2.txt";
-		else  str = "D:\\InputProject\\SchoolYear1\\CourseSemester3.txt";
+		if (semester == 1) str = "Data\\SchoolYear1\\CourseSemester1.txt";
+		else if (semester == 2) str = "Data\\SchoolYear1\\CourseSemester2.txt";
+		else  str = "Data\\SchoolYear1\\CourseSemester3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) str = "D:\\InputProject\\SchoolYear2\\CourseSemester1.txt";
-			else if (semester == 2) str = "D:\\InputProject\\SchoolYear2\\CourseSemester2.txt";
-			else str = "D:\\InputProject\\SchoolYear2\\CourseSemester3.txt";
+			if (semester == 1) str = "Data\\SchoolYear2\\CourseSemester1.txt";
+			else if (semester == 2) str = "Data\\SchoolYear2\\CourseSemester2.txt";
+			else str = "Data\\SchoolYear2\\CourseSemester3.txt";
 		}
 		else
 			if (schoolyear == 3) {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear3\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear3\\CourseSemester2.txt";
-				else  str = "D:\\InputProject\\SchoolYear3\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear3\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear3\\CourseSemester2.txt";
+				else  str = "Data\\SchoolYear3\\CourseSemester3.txt";
 			}
 			else {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear4\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear4\\CourseSemester2.txt";
-				else str = "D:\\InputProject\\SchoolYear4\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear4\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear4\\CourseSemester2.txt";
+				else str = "Data\\SchoolYear4\\CourseSemester3.txt";
 			}
 
 	/*Set up để đọc chữ cái Tiếng việt utf8*/
@@ -351,26 +351,26 @@ void AddCourseSemester(int schoolyear, int semester, CourseInfo* pHead)
 	// Lấy đường dẫn đến file ghi danh sách khóa học
 	if (schoolyear == 1)
 	{
-		if (semester == 1) str = "D:\\InputProject\\SchoolYear1\\CourseSemester1.txt";
-		else if (semester == 2) str = "D:\\InputProject\\SchoolYear1\\CourseSemester2.txt";
-		else  str = "D:\\InputProject\\SchoolYear1\\CourseSemester3.txt";
+		if (semester == 1) str = "Data\\SchoolYear1\\CourseSemester1.txt";
+		else if (semester == 2) str = "Data\\SchoolYear1\\CourseSemester2.txt";
+		else  str = "Data\\SchoolYear1\\CourseSemester3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) str = "D:\\InputProject\\SchoolYear2\\CourseSemester1.txt";
-			else if (semester == 2) str = "D:\\InputProject\\SchoolYear2\\CourseSemester2.txt";
-			else str = "D:\\InputProject\\SchoolYear2\\CourseSemester3.txt";
+			if (semester == 1) str = "Data\\SchoolYear2\\CourseSemester1.txt";
+			else if (semester == 2) str = "Data\\SchoolYear2\\CourseSemester2.txt";
+			else str = "Data\\SchoolYear2\\CourseSemester3.txt";
 		}
 		else
 			if (schoolyear == 3) {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear3\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear3\\CourseSemester2.txt";
-				else  str = "D:\\InputProject\\SchoolYear3\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear3\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear3\\CourseSemester2.txt";
+				else  str = "Data\\SchoolYear3\\CourseSemester3.txt";
 			}
 			else {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear4\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear4\\CourseSemester2.txt";
-				else str = "D:\\InputProject\\SchoolYear4\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear4\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear4\\CourseSemester2.txt";
+				else str = "Data\\SchoolYear4\\CourseSemester3.txt";
 			}
 	wfstream FileOut;
 	// Set up để đọc được chữ Tiếng Viết utf8
@@ -399,26 +399,26 @@ void UpdateCourse(int schoolyear, int semester, int k, Course*& pHead)
 	// Lấy đường dẫn đến chỗ file ghi danh sách course.
 	if (schoolyear == 1)
 	{
-		if (semester == 1) str = "D:\\InputProject\\SchoolYear1\\CourseSemester1.txt";
-		else if (semester == 2) str = "D:\\InputProject\\SchoolYear1\\CourseSemester2.txt";
-		else  str = "D:\\InputProject\\SchoolYear1\\CourseSemester3.txt";
+		if (semester == 1) str = "Data\\SchoolYear1\\CourseSemester1.txt";
+		else if (semester == 2) str = "Data\\SchoolYear1\\CourseSemester2.txt";
+		else  str = "Data\\SchoolYear1\\CourseSemester3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) str = "D:\\InputProject\\SchoolYear2\\CourseSemester1.txt";
-			else if (semester == 2) str = "D:\\InputProject\\SchoolYear2\\CourseSemester2.txt";
-			else str = "D:\\InputProject\\SchoolYear2\\CourseSemester3.txt";
+			if (semester == 1) str = "Data\\SchoolYear2\\CourseSemester1.txt";
+			else if (semester == 2) str = "Data\\SchoolYear2\\CourseSemester2.txt";
+			else str = "Data\\SchoolYear2\\CourseSemester3.txt";
 		}
 		else
 			if (schoolyear == 3) {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear3\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear3\\CourseSemester2.txt";
-				else  str = "D:\\InputProject\\SchoolYear3\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear3\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear3\\CourseSemester2.txt";
+				else  str = "Data\\SchoolYear3\\CourseSemester3.txt";
 			}
 			else {
-				if (semester == 1) str = "D:\\InputProject\\SchoolYear4\\CourseSemester1.txt";
-				else if (semester == 2) str = "D:\\InputProject\\SchoolYear4\\CourseSemester2.txt";
-				else str = "D:\\InputProject\\SchoolYear4\\CourseSemester3.txt";
+				if (semester == 1) str = "Data\\SchoolYear4\\CourseSemester1.txt";
+				else if (semester == 2) str = "Data\\SchoolYear4\\CourseSemester2.txt";
+				else str = "Data\\SchoolYear4\\CourseSemester3.txt";
 			}
 	// Set up để lấy chữ cái Tiếng Việt utf8
 	_setmode(_fileno(stdin), _O_U16TEXT);

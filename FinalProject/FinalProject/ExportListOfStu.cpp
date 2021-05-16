@@ -3,7 +3,8 @@ using namespace std;
 #include "StructStudent.h"
 #include"Student.h"
 
-void ExportListOfStu(Student* pHead) {
+void ExportListOfStu(Student* pHead)
+{
 	string Subject;
 	string Class;
 	Student* pCur = pHead;
@@ -30,6 +31,6 @@ void ExportListOfStu(Student* pHead) {
 	while (!filein.eof()) {
 		while (pCur != nullptr) {
 			filein >> pCur->ID >> a >> pCur->First_Name >> a >> pCur->Last_Name >> a >> pCur->Gender >> a >> n >> a >> pCur->Social_ID >> a;
-		
+		}
 	}
 }

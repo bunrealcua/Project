@@ -144,6 +144,7 @@
     <ClInclude Include="StructStudent.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="visual.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChangePassword.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="ViewEnrolledCourse.cpp" />
     <ClCompile Include="ViewStudentInClass.cpp" />
     <ClCompile Include="ViewStudentInCourse.cpp" />
+    <ClCompile Include="visual.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

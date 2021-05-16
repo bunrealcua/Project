@@ -14,10 +14,10 @@ void registercourse(Student* pHeadStudent, Course* pHeadCourse)
 {
 	string str = "";
 	/*Lấy đường dẫn đền file đăng kí course*/
-	if (pHeadStudent->SchoolYear == 1) str = "C:\\Users\\Tuong Vi\\Documents\\GitHub\\Project\\InputProject\\SchoolYear1\\Register.txt";
-	else if (pHeadStudent->SchoolYear == 2) str = "C:\\Users\\Tuong Vi\\Documents\\GitHub\\Project\\InputProject\\SchoolYear2\\Register.txt";
-	else if (pHeadStudent->SchoolYear == 3) str = "C:\\Users\\Tuong Vi\\Documents\\GitHub\\Project\\InputProject\\SchoolYear3\\Register.txt";
-	else str = "C:\\Users\\Tuong Vi\\Documents\\GitHub\\Project\\InputProject\\SchoolYear4\\Register.txt";
+	if (pHeadStudent->SchoolYear == 1) str = "Data\\SchoolYear1\\Register.txt";
+	else if (pHeadStudent->SchoolYear == 2) str = "Data\\SchoolYear2\\Register.txt";
+	else if (pHeadStudent->SchoolYear == 3) str = "Data\\SchoolYear3\\Register.txt";
+	else str = "Data\\SchoolYear4\\Register.txt";
 	fstream f(str, ios::app);
 	f << pHeadStudent->ID;
 	while (pHeadCourse != nullptr)

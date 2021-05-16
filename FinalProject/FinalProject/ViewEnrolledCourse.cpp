@@ -65,20 +65,20 @@ void viewEnrolledCourses(int schoolyear, int semester, int tempInput) {
 	/*Mở file Registration*/
 	string path = "";
 	if (schoolyear == 1) {
-		if (semester == 1) path = "D:\\InputProject\\SchoolYear1\\Registration1.txt";
-		else if (semester == 2) path = "D:\\InputProject\\SchoolYear1\\Registration2.txt";
-		else path = "D:\\InputProject\\SchoolYear1\\Registration3.txt";
+		if (semester == 1) path = "Data\\SchoolYear1\\Registration1.txt";
+		else if (semester == 2) path = "Data\\SchoolYear1\\Registration2.txt";
+		else path = "Data\\SchoolYear1\\Registration3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) path = "D:\\InputProject\\SchoolYear2\\Registration1.txt";
-			else if (semester == 2) path = "D:\\InputProject\\SchoolYear2\\Registration2.txt";
-			else path = "D:\\InputProject\\SchoolYear2\\Registration3.txt";
+			if (semester == 1) path = "Data\\SchoolYear2\\Registration1.txt";
+			else if (semester == 2) path = "Data\\SchoolYear2\\Registration2.txt";
+			else path = "Data\\SchoolYear2\\Registration3.txt";
 		}
 		else {
-			if (semester == 1) path = "D:\\InputProject\\SchoolYear3\\Registration1.txt";
-			else if (semester == 2) path = "D:\\InputProject\\SchoolYear3\\Registration2.txt";
-			else path = "D:\\InputProject\\SchoolYear3\\Registration3.txt";
+			if (semester == 1) path = "Data\\SchoolYear3\\Registration1.txt";
+			else if (semester == 2) path = "Data\\SchoolYear3\\Registration2.txt";
+			else path = "Data\\SchoolYear3\\Registration3.txt";
 		}
 	ifstream FileIn;
 	FileIn.open(path);
@@ -111,26 +111,26 @@ void PrintOutEnrolledCourses(int schoolyear, int semester, MaSo* headMaSo) {
 	string path = "";
 	if (schoolyear == 1)
 	{
-		if (semester == 1) path = "D:\\InputProject\\SchoolYear1\\CourseSemester1.txt";
-		else if (semester == 2) path = "D:\\InputProject\\SchoolYear1\\CourseSemester2.txt";
-		else  path = "D:\\InputProject\\SchoolYear1\\CourseSemester3.txt";
+		if (semester == 1) path = "Data\\SchoolYear1\\CourseSemester1.txt";
+		else if (semester == 2) path = "Data\\SchoolYear1\\CourseSemester2.txt";
+		else  path = "Data\\SchoolYear1\\CourseSemester3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) path = "D:\\InputProject\\SchoolYear2\\CourseSemester1.txt";
-			else if (semester == 2) path = "D:\\InputProject\\SchoolYear2\\CourseSemester2.txt";
-			else path = "D:\\InputProject\\SchoolYear2\\CourseSemester3.txt";
+			if (semester == 1) path = "Data\\SchoolYear2\\CourseSemester1.txt";
+			else if (semester == 2) path = "Data\\SchoolYear2\\CourseSemester2.txt";
+			else path = "Data\\SchoolYear2\\CourseSemester3.txt";
 		}
 		else
 			if (schoolyear == 3) {
-				if (semester == 1) path = "D:\\InputProject\\SchoolYear3\\CourseSemester1.txt";
-				else if (semester == 2) path = "D:\\InputProject\\SchoolYear3\\CourseSemester2.txt";
-				else  path = "D:\\InputProject\\SchoolYear3\\CourseSemester3.txt";
+				if (semester == 1) path = "Data\\SchoolYear3\\CourseSemester1.txt";
+				else if (semester == 2) path = "Data\\SchoolYear3\\CourseSemester2.txt";
+				else  path = "Data\\SchoolYear3\\CourseSemester3.txt";
 			}
 			else {
-				if (semester == 1) path = "D:\\InputProject\\SchoolYear4\\CourseSemester1.txt";
-				else if (semester == 2) path = "D:\\InputProject\\SchoolYear4\\CourseSemester2.txt";
-				else path = "D:\\InputProject\\SchoolYear4\\CourseSemester3.txt";
+				if (semester == 1) path = "Data\\SchoolYear4\\CourseSemester1.txt";
+				else if (semester == 2) path = "Data\\SchoolYear4\\CourseSemester2.txt";
+				else path = "Data\\SchoolYear4\\CourseSemester3.txt";
 			}
 	wifstream FileIn;
 	FileIn.open(path);

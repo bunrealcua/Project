@@ -186,7 +186,7 @@ Student* defineStudent(Student* &headStudent,string username, string password)
 	wstring wstr=L"";
 
 	/*Schoolyear 1*/
-	string path = "D:\\InputProject\\SchoolYear1\\APCS.csv";
+	string path = "Data\\SchoolYear1\\APCS.csv";
 	headStudent = nullptr;
 	Input(path, wstr, headStudent);
 	curStudent = headStudent;
@@ -194,7 +194,8 @@ Student* defineStudent(Student* &headStudent,string username, string password)
 		curStudent = curStudent->pNext;
 	if (curStudent != nullptr)  return curStudent;  
 	DeleteListStudent(headStudent);
-	string path = "D:\\InputProject\\SchoolYear1\\CNTN.csv";
+	
+	path = "Data\\SchoolYear1\\CNTN.csv";
 	headStudent = nullptr;
 	Input(path, wstr, headStudent);
 	curStudent = headStudent;
@@ -203,7 +204,7 @@ Student* defineStudent(Student* &headStudent,string username, string password)
 	if (curStudent != nullptr)  return curStudent;
 	DeleteListStudent(headStudent);
 	
-	string path = "D:\\InputProject\\SchoolYear1\\CLC.csv";
+	path = "Data\\SchoolYear1\\CLC.csv";
 	headStudent = nullptr;
 	Input(path, wstr, headStudent);
 	curStudent = headStudent;
@@ -212,7 +213,7 @@ Student* defineStudent(Student* &headStudent,string username, string password)
 	if (curStudent != nullptr)  return curStudent;
 	DeleteListStudent(headStudent);
 
-	string path = "D:\\InputProject\\SchoolYear1\\CTDT.csv";
+	path = "Data\\SchoolYear1\\CTDT.csv";
 	headStudent = nullptr;
 	Input(path, wstr, headStudent);
 	curStudent = headStudent;
@@ -221,7 +222,7 @@ Student* defineStudent(Student* &headStudent,string username, string password)
 	if (curStudent != nullptr)  return curStudent;
 	DeleteListStudent(headStudent);
 
-	string path = "D:\\InputProject\\SchoolYear1\\VP.csv";
+	path = "Data\\SchoolYear1\\VP.csv";
 	headStudent = nullptr;
 	Input(path, wstr, headStudent);
 	curStudent = headStudent;

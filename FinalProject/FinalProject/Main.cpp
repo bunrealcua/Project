@@ -12,6 +12,7 @@
 #include<ctime>
 #include<Windows.h>
 #include"Menu.h"
+#include"visual.h"
 using namespace std;
 
 void ViewClass(int option, int schoolyear, Student*& headStudent, Class*& headClass);
@@ -77,20 +78,20 @@ void SetUpRegistration(int schoolyear, int semester, Student* headStudent, Cours
 	string str = "";
 	/*Lấy đường dẫn ghi file registration*/
 	if (schoolyear == 1) {
-		if (semester == 1) str = "D:\\InputProject\\SchoolYear1\\Registration1.txt";
-		else if (semester == 2) str = "D:\\InputProject\\SchoolYear1\\Registration2.txt";
-		else str = "D:\\InputProject\\SchoolYear1\\Registration3.txt";
+		if (semester == 1) str = "Data\\SchoolYear1\\Registration1.txt";
+		else if (semester == 2) str = "Data\\SchoolYear1\\Registration2.txt";
+		else str = "Data\\SchoolYear1\\Registration3.txt";
 	}
 	else
 		if (schoolyear == 2) {
-			if (semester == 1) str = "D:\\InputProject\\SchoolYear2\\Registration1.txt";
-			else if (semester == 2) str = "D:\\InputProject\\SchoolYear2\\Registration2.txt";
-			else str = "D:\\InputProject\\SchoolYear2\\Registration3.txt";
+			if (semester == 1) str = "Data\\SchoolYear2\\Registration1.txt";
+			else if (semester == 2) str = "Data\\SchoolYear2\\Registration2.txt";
+			else str = "Data\\SchoolYear2\\Registration3.txt";
 		}
 		else {
-			if (semester == 1) str = "D:\\InputProject\\SchoolYear3\\Registration1.txt";
-			else if (semester == 2) str = "D:\\InputProject\\SchoolYear3\\Registration2.txt";
-			else str = "D:\\InputProject\\SchoolYear3\\Registration3.txt";
+			if (semester == 1) str = "Data\\SchoolYear3\\Registration1.txt";
+			else if (semester == 2) str = "Data\\SchoolYear3\\Registration2.txt";
+			else str = "Data\\SchoolYear3\\Registration3.txt";
 		}
 	ofstream FileOut;
 	/*Lúc đăng ký thì ghi tiếp nội dung đăng ký, vì có nhiều sinh viên*/
@@ -213,8 +214,6 @@ void SelectCourse(Course* pCourse, Course*& CourseSelect)
 			else wcout << "This course can not be selected." << endl;
 		}
 
-
-
 		wcout << L"Successfully!" << endl;
 		/*Cần phải xác định lại update và xóa.*/
 		wcout << L"Option: 1. Select next  2. Select again  3. Done registration"; /*Biến nhận option*/
@@ -254,7 +253,8 @@ int wmain()
 	/*_setmode(_fileno(stdin), _O_U16TEXT);
 	_setmode(_fileno(stdout), _O_U16TEXT);*/
 	wstring_convert <codecvt_utf8_utf16<wchar_t>> convert;
-	string path = "D:\\InputProject\\StaffAccount.txt";
+	string path = "Data\\StaffAccount.txt";
+	newScreen();
 	int button = 0;
 	/*****Danh sách các biến cần sử dụng trong chương trình ******/
 	/*Set up thời gian của học kì*/

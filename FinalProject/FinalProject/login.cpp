@@ -38,91 +38,91 @@ bool checkLogin(string username, string pass) {
 	string path="";
 
 	/*Schoolyear 1*/
-	path = "D:\\InputProject\\SchoolYear1\\APCS.csv";
+	path = "Data\\SchoolYear1\\APCS.csv";
 	Input(path,str,headStudent);
 	if (loginStudent(headStudent, username, pass)==true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear1\\CLC.csv";
+	path = "Data\\SchoolYear1\\CLC.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear1\\CNTN.csv";
+	path = "Data\\SchoolYear1\\CNTN.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear1\\VP.csv";
+	path = "Data\\SchoolYear1\\VP.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear1\\CTDT.csv";
+	path = "Data\\SchoolYear1\\CTDT.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
 
 	/*Schoolyear 2*/
-	path = "D:\\InputProject\\SchoolYear2\\APCS.csv";
+	path = "Data\\SchoolYear2\\APCS.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear2\\CLC.csv";
+	path = "Data\\SchoolYear2\\CLC.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear2\\CNTN.csv";
+	path = "Data\\SchoolYear2\\CNTN.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear2\\VP.csv";
+	path = "Data\\SchoolYear2\\VP.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear2\\CTDT.csv";
+	path = "Data\\SchoolYear2\\CTDT.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
 
 
 	/*Schoolyear 3*/
-	path = "D:\\InputProject\\SchoolYear3\\APCS.csv";
+	path = "Data\\SchoolYear3\\APCS.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear3\\CLC.csv";
+	path = "Data\\SchoolYear3\\CLC.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear3\\CNTN.csv";
+	path = "Data\\SchoolYear3\\CNTN.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear3\\VP.csv";
+	path = "Data\\SchoolYear3\\VP.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear3\\CTDT.csv";
+	path = "Data\\SchoolYear3\\CTDT.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
 
 
 	/*Schoolyear 4*/
-	path = "D:\\InputProject\\SchoolYear4\\APCS.csv";
+	path = "Data\\SchoolYear4\\APCS.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear4\\CLC.csv";
+	path = "Data\\SchoolYear4\\CLC.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear4\\CNTN.csv";
+	path = "Data\\SchoolYear4\\CNTN.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear4\\VP.csv";
+	path = "Data\\SchoolYear4\\VP.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);
-	path = "D:\\InputProject\\SchoolYear4\\CTDT.csv";
+	path = "Data\\SchoolYear4\\CTDT.csv";
 	Input(path, str, headStudent);
 	if (loginStudent(headStudent, username, pass) == true) return true;
 	DeleteListStudent(headStudent);

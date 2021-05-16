@@ -9,34 +9,34 @@ void EditStudent(Student* pHead,int schoolyear, int option) {
 	string str;
 	if (schoolyear == 1)
 	{
-		if (option == 1) str = "D:\\InputProject\\SchoolYear1\\APCS.csv";
-		else if (option == 2) str = "D:\\InputProject\\SchoolYear1\\CLC.csv";
-		else if (option == 3) str = "D:\\InputProject\\SchoolYear1\\CNTT.csv";
-		else if (option == 4) str = "D:\\InputProject\\SchoolYear1\\CTDT.csv";
-		else str = "D:\\InputProject\\SchoolYear1\\VP.csv";
+		if (option == 1) str = "Data\\SchoolYear1\\APCS.csv";
+		else if (option == 2) str = "Data\\SchoolYear1\\CLC.csv";
+		else if (option == 3) str = "Data\\SchoolYear1\\CNTT.csv";
+		else if (option == 4) str = "Data\\SchoolYear1\\CTDT.csv";
+		else str = "Data\\SchoolYear1\\VP.csv";
 	}
 	else if (schoolyear == 2)
 	{
-		if (option == 1) str = "D:\\InputProject\\SchoolYear2\\APCS.csv";
-		else if (option == 2) str = "D:\\InputProject\\SchoolYear2\\CLC.csv";
-		else if (option == 3) str = "D:\\InputProject\\SchoolYear2\\CNTT.csv";
-		else if (option == 4) str = "D:\\InputProject\\SchoolYear2\\CTDT.csv";
-		else str = "D:\\InputProject\\SchoolYear2\\VP.csv";
+		if (option == 1) str = "Data\\SchoolYear2\\APCS.csv";
+		else if (option == 2) str = "Data\\SchoolYear2\\CLC.csv";
+		else if (option == 3) str = "Data\\SchoolYear2\\CNTT.csv";
+		else if (option == 4) str = "Data\\SchoolYear2\\CTDT.csv";
+		else str = "Data\\SchoolYear2\\VP.csv";
 	}
 	else if (schoolyear == 3)
 	{
-		if (option == 1) str = "D:\\InputProject\\SchoolYear3\\APCS.csv";
-		else if (option == 2) str = "D:\\InputProject\\SchoolYear3\\CLC.csv";
-		else if (option == 3) str = "D:\\InputProject\\SchoolYear3\\CNTT.csv";
-		else if (option == 4) str = "D:\\InputProject\\SchoolYear3\\CTDT.csv";
-		else str = "D:\\InputProject\\SchoolYear3\\VP.csv";
+		if (option == 1) str = "Data\\SchoolYear3\\APCS.csv";
+		else if (option == 2) str = "Data\\SchoolYear3\\CLC.csv";
+		else if (option == 3) str = "Data\\SchoolYear3\\CNTT.csv";
+		else if (option == 4) str = "Data\\SchoolYear3\\CTDT.csv";
+		else str = "Data\\SchoolYear3\\VP.csv";
 	}
 	else {
-		if (option == 1) str = "D:\\InputProject\\SchoolYear1\\APCS.csv";
-		else if (option == 2) str = "D:\\InputProject\\SchoolYear1\\CLC.csv";
-		else if (option == 3) str = "D:\\InputProject\\SchoolYear1\\CNTT.csv";
-		else if (option == 4) str = "D:\\InputProject\\SchoolYear1\\CTDT.csv";
-		else str = "D:\\InputProject\\SchoolYear1\\VP.csv";
+		if (option == 1) str = "Data\\SchoolYear1\\APCS.csv";
+		else if (option == 2) str = "Data\\SchoolYear1\\CLC.csv";
+		else if (option == 3) str = "Data\\SchoolYear1\\CNTT.csv";
+		else if (option == 4) str = "Data\\SchoolYear1\\CTDT.csv";
+		else str = "Data\\SchoolYear1\\VP.csv";
 	}
 	int id;
 	wstring firstName;
@@ -94,7 +94,4 @@ void EditStudent(Student* pHead,int schoolyear, int option) {
 				}
 			}
 		}
-
-	
-
 }
